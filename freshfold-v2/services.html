@@ -1,0 +1,202 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8"/><meta name="viewport" content="width=device-width,initial-scale=1.0"/>
+  <title>Services & Pricing – FreshFold</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link href="https://fonts.googleapis.com/css2?family=Outfit:wght@300;400;500;600;700;800;900&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="css/style.css">
+</head>
+<body>
+<nav class="navbar">
+  <div class="nav-logo">Fresh<span>Fold</span></div>
+  <ul class="nav-links">
+    <li><a href="index.html">Home</a></li><li><a href="services.html" class="active">Services</a></li>
+    <li><a href="how-it-works.html">How It Works</a></li><li><a href="track.html">Track Order</a></li>
+    <li><a href="blog.html">Blog</a></li><li><a href="about.html">About</a></li><li><a href="contact.html">Contact</a></li>
+  </ul>
+  <div class="nav-right"><a href="order.html" class="btn btn-green">Order Now</a></div>
+  <div class="hamburger" onclick="toggleMenu()">&#9776;</div>
+</nav>
+<div class="mobile-menu" id="mobileMenu">
+  <a href="index.html">Home</a><a href="services.html">Services</a><a href="how-it-works.html">How It Works</a>
+  <a href="track.html">Track Order</a><a href="blog.html">Blog</a><a href="about.html">About</a>
+  <a href="contact.html">Contact</a><a href="order.html" class="btn btn-green">Order Now</a>
+</div>
+<section class="page-hero">
+  <h1>Services & Pricing</h1>
+  <p>Simple per-item pricing, no hidden charges. Two service types, two delivery speeds.</p>
+</section>
+
+<!-- TABS -->
+<section class="pricing-section">
+  <div class="sec-head"><span class="tag">Our Services</span><h2>Choose What You Need</h2><p>Ironing only, or full wash + iron. Standard or express delivery.</p></div>
+  <div class="pricing-tabs">
+    <div class="ptab active" onclick="showTab('iron',this)">🧹 Ironing Only</div>
+    <div class="ptab" onclick="showTab('wash',this)">🧼 Wash + Iron</div>
+  </div>
+
+  <!-- IRONING PRICES -->
+  <div id="tab-iron" class="pricing-grid">
+    <div class="price-card popular">
+      <div class="pop-tag">Most Popular</div>
+      <div class="pc-icon">👔</div>
+      <div class="pc-name">Shirt (Formal / Casual)</div>
+      <div class="pc-desc">All shirt types — dress shirts, casual shirts, kurtas</div>
+      <div class="pc-prices">
+        <div class="pc-price-item"><span class="label">📦 Standard 24hr</span><span class="amount">Rs. 80</span></div>
+        <div class="pc-price-item express"><span class="label">⚡ Express 12hr</span><span class="amount">Rs. 130</span></div>
+      </div>
+    </div>
+    <div class="price-card">
+      <div class="pc-icon">👖</div>
+      <div class="pc-name">Pants / Trousers</div>
+      <div class="pc-desc">Formal trousers, jeans, chinos, shalwar bottoms</div>
+      <div class="pc-prices">
+        <div class="pc-price-item"><span class="label">📦 Standard 24hr</span><span class="amount">Rs. 110</span></div>
+        <div class="pc-price-item express"><span class="label">⚡ Express 12hr</span><span class="amount">Rs. 160</span></div>
+      </div>
+    </div>
+    <div class="price-card">
+      <div class="pc-icon">🎽</div>
+      <div class="pc-name">Full Outfit (Shirt + Pants)</div>
+      <div class="pc-desc">Complete outfit bundle — save vs. individual pricing</div>
+      <div class="pc-prices">
+        <div class="pc-price-item"><span class="label">📦 Standard 24hr</span><span class="amount">Rs. 250</span></div>
+        <div class="pc-price-item express"><span class="label">⚡ Express 12hr</span><span class="amount">Rs. 350</span></div>
+      </div>
+    </div>
+    <div class="price-card">
+      <div class="pc-icon">👗</div>
+      <div class="pc-name">Shalwar Kameez (Set)</div>
+      <div class="pc-desc">Full shalwar kameez set including kameez and shalwar</div>
+      <div class="pc-prices">
+        <div class="pc-price-item"><span class="label">📦 Standard 24hr</span><span class="amount">Rs. 150</span></div>
+        <div class="pc-price-item express"><span class="label">⚡ Express 12hr</span><span class="amount">Rs. 220</span></div>
+      </div>
+    </div>
+    <div class="price-card">
+      <div class="pc-icon">🧥</div>
+      <div class="pc-name">Suit / Sherwani</div>
+      <div class="pc-desc">Formal suits, blazers, sherwani — handled with extra care</div>
+      <div class="pc-prices">
+        <div class="pc-price-item"><span class="label">📦 Standard 24hr</span><span class="amount">Rs. 280</span></div>
+        <div class="pc-price-item express"><span class="label">⚡ Express 12hr</span><span class="amount">Rs. 400</span></div>
+      </div>
+    </div>
+    <div class="price-card">
+      <div class="pc-icon">🧣</div>
+      <div class="pc-name">Dupatta / Scarf</div>
+      <div class="pc-desc">Dupattas, scarves, and light fabric accessories</div>
+      <div class="pc-prices">
+        <div class="pc-price-item"><span class="label">📦 Standard 24hr</span><span class="amount">Rs. 60</span></div>
+        <div class="pc-price-item express"><span class="label">⚡ Express 12hr</span><span class="amount">Rs. 100</span></div>
+      </div>
+    </div>
+  </div>
+
+  <!-- WASH PRICES -->
+  <div id="tab-wash" class="pricing-grid" style="display:none;">
+    <div class="price-card popular">
+      <div class="pop-tag">Full Service</div>
+      <div class="pc-icon">👔</div>
+      <div class="pc-name">Shirt (Wash + Iron)</div>
+      <div class="pc-desc">Full wash cycle followed by professional ironing</div>
+      <div class="pc-prices">
+        <div class="pc-price-item"><span class="label">📦 Standard 24hr</span><span class="amount">Rs. 150</span></div>
+        <div class="pc-price-item express"><span class="label">⚡ Express 12hr</span><span class="amount">Rs. 220</span></div>
+      </div>
+    </div>
+    <div class="price-card">
+      <div class="pc-icon">👖</div>
+      <div class="pc-name">Pants (Wash + Iron)</div>
+      <div class="pc-desc">Machine or hand wash based on fabric, then ironed</div>
+      <div class="pc-prices">
+        <div class="pc-price-item"><span class="label">📦 Standard 24hr</span><span class="amount">Rs. 180</span></div>
+        <div class="pc-price-item express"><span class="label">⚡ Express 12hr</span><span class="amount">Rs. 250</span></div>
+      </div>
+    </div>
+    <div class="price-card">
+      <div class="pc-icon">🎽</div>
+      <div class="pc-name">Full Outfit (Wash + Iron)</div>
+      <div class="pc-desc">Complete outfit — washed and ironed, bundled price</div>
+      <div class="pc-prices">
+        <div class="pc-price-item"><span class="label">📦 Standard 24hr</span><span class="amount">Rs. 400</span></div>
+        <div class="pc-price-item express"><span class="label">⚡ Express 12hr</span><span class="amount">Rs. 550</span></div>
+      </div>
+    </div>
+    <div class="price-card">
+      <div class="pc-icon">👗</div>
+      <div class="pc-name">Shalwar Kameez (Wash + Iron)</div>
+      <div class="pc-desc">Full set washed and pressed to perfection</div>
+      <div class="pc-prices">
+        <div class="pc-price-item"><span class="label">📦 Standard 24hr</span><span class="amount">Rs. 250</span></div>
+        <div class="pc-price-item express"><span class="label">⚡ Express 12hr</span><span class="amount">Rs. 350</span></div>
+      </div>
+    </div>
+    <div class="price-card">
+      <div class="pc-icon">🧥</div>
+      <div class="pc-name">Suit / Sherwani (Wash + Iron)</div>
+      <div class="pc-desc">Delicate wash + professional press for formal wear</div>
+      <div class="pc-prices">
+        <div class="pc-price-item"><span class="label">📦 Standard 24hr</span><span class="amount">Rs. 500</span></div>
+        <div class="pc-price-item express"><span class="label">⚡ Express 12hr</span><span class="amount">Rs. 700</span></div>
+      </div>
+    </div>
+    <div class="price-card">
+      <div class="pc-icon">🧣</div>
+      <div class="pc-name">Dupatta / Scarf (Wash + Iron)</div>
+      <div class="pc-desc">Hand washed and gently ironed for delicate fabrics</div>
+      <div class="pc-prices">
+        <div class="pc-price-item"><span class="label">📦 Standard 24hr</span><span class="amount">Rs. 100</span></div>
+        <div class="pc-price-item express"><span class="label">⚡ Express 12hr</span><span class="amount">Rs. 150</span></div>
+      </div>
+    </div>
+  </div>
+
+  <!-- DISCOUNTS -->
+  <div style="background:var(--card);border:1px solid var(--border);border-radius:var(--radius);padding:2rem;max-width:600px;margin:3rem auto 0;text-align:center;">
+    <h3 style="font-family:var(--font);font-size:1.1rem;font-weight:700;color:#fff;margin-bottom:1rem;">💸 Bulk Discounts</h3>
+    <div style="display:flex;gap:1rem;justify-content:center;flex-wrap:wrap;">
+      <div style="background:var(--dark2);border:1px solid var(--border);border-radius:10px;padding:1rem 1.5rem;text-align:center;">
+        <div style="font-family:var(--font);font-size:1.5rem;font-weight:800;color:var(--green-light);">10%</div>
+        <div style="color:var(--muted);font-size:.78rem;">10+ items</div>
+      </div>
+      <div style="background:var(--dark2);border:1px solid var(--border);border-radius:10px;padding:1rem 1.5rem;text-align:center;">
+        <div style="font-family:var(--font);font-size:1.5rem;font-weight:800;color:var(--green-light);">15%</div>
+        <div style="color:var(--muted);font-size:.78rem;">20+ items</div>
+      </div>
+      <div style="background:var(--dark2);border:1px solid var(--border);border-radius:10px;padding:1rem 1.5rem;text-align:center;">
+        <div style="font-family:var(--font);font-size:1.5rem;font-weight:800;color:var(--gold);">Custom</div>
+        <div style="color:var(--muted);font-size:.78rem;">Monthly plans</div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<section class="cta-section">
+  <h2>Ready to Order?</h2>
+  <p>Use code <strong>FRESH20</strong> for 20% off your first order.</p>
+  <a href="order.html" class="btn btn-green btn-lg">Place Order Now →</a>
+</section>
+
+<footer class="footer">
+  <div class="footer-top">
+    <div class="footer-brand"><div class="nav-logo">Fresh<span>Fold</span></div><p>Professional laundry & ironing pickup across Rawalpindi and Islamabad.</p><div class="footer-social"><a class="social-btn" href="https://wa.me/923333333333" target="_blank">💬</a><a class="social-btn" href="#">📸</a></div></div>
+    <div class="footer-col"><h4>Pages</h4><a href="index.html">Home</a><a href="services.html">Services</a><a href="how-it-works.html">How It Works</a><a href="track.html">Track Order</a><a href="blog.html">Blog</a></div>
+    <div class="footer-col"><h4>Contact</h4><p>📱 0333-3333333</p><p>📍 Rawalpindi / Islamabad</p><p>🕐 Mon–Sat: 8AM–8PM</p></div>
+  </div>
+  <div class="footer-bottom"><p>© 2025 FreshFold. All rights reserved.</p></div>
+</footer>
+<a class="wa-float" href="https://wa.me/923333333333" target="_blank"><div class="wa-pulse"></div>💬</a>
+<script src="js/main.js"></script>
+<script>
+function showTab(tab, el) {
+  document.getElementById('tab-iron').style.display = tab==='iron' ? 'grid' : 'none';
+  document.getElementById('tab-wash').style.display = tab==='wash' ? 'grid' : 'none';
+  document.querySelectorAll('.ptab').forEach(t => t.classList.remove('active'));
+  el.classList.add('active');
+}
+</script>
+</body>
+</html>

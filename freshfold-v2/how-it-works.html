@@ -1,0 +1,161 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8"/><meta name="viewport" content="width=device-width,initial-scale=1.0"/>
+  <title>How It Works – FreshFold</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link href="https://fonts.googleapis.com/css2?family=Outfit:wght@300;400;500;600;700;800;900&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="css/style.css">
+</head>
+<body>
+<nav class="navbar">
+  <div class="nav-logo">Fresh<span>Fold</span></div>
+  <ul class="nav-links">
+    <li><a href="index.html">Home</a></li><li><a href="services.html">Services</a></li>
+    <li><a href="how-it-works.html" class="active">How It Works</a></li><li><a href="track.html">Track Order</a></li>
+    <li><a href="blog.html">Blog</a></li><li><a href="about.html">About</a></li><li><a href="contact.html">Contact</a></li>
+  </ul>
+  <div class="nav-right"><a href="order.html" class="btn btn-green">Order Now</a></div>
+  <div class="hamburger" onclick="toggleMenu()">&#9776;</div>
+</nav>
+<div class="mobile-menu" id="mobileMenu">
+  <a href="index.html">Home</a><a href="services.html">Services</a><a href="how-it-works.html">How It Works</a>
+  <a href="track.html">Track Order</a><a href="blog.html">Blog</a><a href="about.html">About</a>
+  <a href="contact.html">Contact</a><a href="order.html" class="btn btn-green">Order Now</a>
+</div>
+
+<section class="page-hero">
+  <h1>How It Works</h1>
+  <p>From your door back to your door in 5 simple steps — all within 24 hours.</p>
+</section>
+
+<!-- STEPS DETAILED -->
+<section style="padding:5rem 5%;max-width:800px;margin:0 auto;">
+
+  <div style="display:flex;gap:2rem;align-items:flex-start;margin-bottom:1.5rem;" class="anim">
+    <div style="display:flex;flex-direction:column;align-items:center;flex-shrink:0;">
+      <div style="width:56px;height:56px;border-radius:50%;background:linear-gradient(135deg,var(--green),var(--green-dark));display:flex;align-items:center;justify-content:center;font-family:var(--font);font-size:1.1rem;font-weight:800;color:#fff;">1</div>
+      <div style="width:2px;height:50px;background:var(--border);margin-top:.5rem;"></div>
+    </div>
+    <div class="card" style="padding:1.8rem;flex:1;">
+      <h3 style="font-family:var(--font);font-size:1.1rem;font-weight:700;color:#fff;margin-bottom:.6rem;">📅 Schedule a Pickup</h3>
+      <p style="color:var(--muted);font-size:.9rem;line-height:1.75;">Message us on WhatsApp at <strong style="color:var(--green-light)">0333-3333333</strong> or fill out our order form. Tell us your name, address, number of clothes, and your preferred pickup time. We'll confirm your slot within minutes.</p>
+    </div>
+  </div>
+
+  <div style="display:flex;gap:2rem;align-items:flex-start;margin-bottom:1.5rem;" class="anim">
+    <div style="display:flex;flex-direction:column;align-items:center;flex-shrink:0;">
+      <div style="width:56px;height:56px;border-radius:50%;background:linear-gradient(135deg,var(--green),var(--green-dark));display:flex;align-items:center;justify-content:center;font-family:var(--font);font-size:1.1rem;font-weight:800;color:#fff;">2</div>
+      <div style="width:2px;height:50px;background:var(--border);margin-top:.5rem;"></div>
+    </div>
+    <div class="card" style="padding:1.8rem;flex:1;">
+      <h3 style="font-family:var(--font);font-size:1.1rem;font-weight:700;color:#fff;margin-bottom:.6rem;">🚴 We Pick Up Your Clothes</h3>
+      <p style="color:var(--muted);font-size:.9rem;line-height:1.75;">Our rider arrives at your hostel, home, or office at the confirmed time. Simply hand over your clothes in a bag — no special packaging needed. You'll receive a WhatsApp confirmation with your <strong style="color:var(--green-light)">unique Order ID</strong> for tracking.</p>
+    </div>
+  </div>
+
+  <div style="display:flex;gap:2rem;align-items:flex-start;margin-bottom:1.5rem;" class="anim">
+    <div style="display:flex;flex-direction:column;align-items:center;flex-shrink:0;">
+      <div style="width:56px;height:56px;border-radius:50%;background:linear-gradient(135deg,var(--green),var(--green-dark));display:flex;align-items:center;justify-content:center;font-family:var(--font);font-size:1.1rem;font-weight:800;color:#fff;">3</div>
+      <div style="width:2px;height:50px;background:var(--border);margin-top:.5rem;"></div>
+    </div>
+    <div class="card" style="padding:1.8rem;flex:1;">
+      <h3 style="font-family:var(--font);font-size:1.1rem;font-weight:700;color:#fff;margin-bottom:.6rem;">🧹 We Wash &amp; Iron with Care</h3>
+      <p style="color:var(--muted);font-size:.9rem;line-height:1.75;">Each item is tagged with your order ID and processed with professional-grade steam irons. For wash + iron orders, we use the correct wash cycle and temperature for each fabric type. No burns, no damage — guaranteed.</p>
+    </div>
+  </div>
+
+  <div style="display:flex;gap:2rem;align-items:flex-start;margin-bottom:1.5rem;" class="anim">
+    <div style="display:flex;flex-direction:column;align-items:center;flex-shrink:0;">
+      <div style="width:56px;height:56px;border-radius:50%;background:linear-gradient(135deg,var(--green),var(--green-dark));display:flex;align-items:center;justify-content:center;font-family:var(--font);font-size:1.1rem;font-weight:800;color:#fff;">4</div>
+      <div style="width:2px;height:50px;background:var(--border);margin-top:.5rem;"></div>
+    </div>
+    <div class="card" style="padding:1.8rem;flex:1;">
+      <h3 style="font-family:var(--font);font-size:1.1rem;font-weight:700;color:#fff;margin-bottom:.6rem;">📦 Neatly Packed</h3>
+      <p style="color:var(--muted);font-size:.9rem;line-height:1.75;">Once processed, your clothes are folded or hung and packed in clean, branded FreshFold bags. Shirts are hung to avoid re-wrinkling during transit. Shalwar kameez and delicate items are individually folded and layered.</p>
+    </div>
+  </div>
+
+  <div style="display:flex;gap:2rem;align-items:flex-start;margin-bottom:3rem;" class="anim">
+    <div style="display:flex;flex-direction:column;align-items:center;flex-shrink:0;">
+      <div style="width:56px;height:56px;border-radius:50%;background:linear-gradient(135deg,var(--green-light),var(--green));display:flex;align-items:center;justify-content:center;font-family:var(--font);font-size:1.1rem;font-weight:800;color:#fff;">✓</div>
+    </div>
+    <div class="card" style="padding:1.8rem;flex:1;border-color:var(--green);">
+      <h3 style="font-family:var(--font);font-size:1.1rem;font-weight:700;color:var(--green-light);margin-bottom:.6rem;">🏠 Delivered to Your Door</h3>
+      <p style="color:var(--muted);font-size:.9rem;line-height:1.75;">Your fresh clothes are returned to your location within <strong style="color:#fff">24 hours</strong> (standard) or <strong style="color:#fff">12 hours</strong> (express). You'll receive a WhatsApp notification before the rider arrives. Payment is collected at delivery — cash, Easypaisa, or JazzCash.</p>
+    </div>
+  </div>
+
+  <div style="text-align:center;">
+    <a href="order.html" class="btn btn-green btn-lg">Book Your First Pickup →</a>
+  </div>
+</section>
+
+<!-- DELIVERY TIME TABLE -->
+<section style="padding:3rem 5% 5rem;background:var(--dark2);">
+  <div class="sec-head"><span class="tag">Delivery Times</span><h2>Standard vs Express</h2></div>
+  <div style="max-width:700px;margin:0 auto;">
+    <div style="display:grid;grid-template-columns:1fr 1fr;gap:1.5rem;" class="anim">
+      <div class="card" style="padding:2rem;text-align:center;">
+        <div style="font-size:2rem;margin-bottom:.8rem;">📦</div>
+        <h3 style="font-family:var(--font);font-size:1.1rem;font-weight:800;color:#fff;margin-bottom:.4rem;">Standard</h3>
+        <div style="font-family:var(--font);font-size:2rem;font-weight:800;color:var(--green-light);margin:.6rem 0;">24 hrs</div>
+        <p style="color:var(--muted);font-size:.82rem;">Pickup today → delivered tomorrow at the same time</p>
+        <div style="margin-top:1rem;padding:.6rem;background:var(--dark2);border-radius:8px;color:var(--muted);font-size:.78rem;">No extra charge</div>
+      </div>
+      <div class="card" style="padding:2rem;text-align:center;border-color:var(--gold);">
+        <div style="font-size:2rem;margin-bottom:.8rem;">⚡</div>
+        <h3 style="font-family:var(--font);font-size:1.1rem;font-weight:800;color:#fff;margin-bottom:.4rem;">Express</h3>
+        <div style="font-family:var(--font);font-size:2rem;font-weight:800;color:var(--gold);margin:.6rem 0;">12 hrs</div>
+        <p style="color:var(--muted);font-size:.82rem;">Pickup morning → delivered same evening</p>
+        <div style="margin-top:1rem;padding:.6rem;background:rgba(245,197,66,.08);border-radius:8px;color:var(--gold);font-size:.78rem;">+Rs. 50 per item surcharge</div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- FAQ -->
+<section style="padding:5rem 5%;max-width:800px;margin:0 auto;">
+  <div class="sec-head" style="text-align:left;"><span class="tag">FAQ</span><h2>Common Questions</h2></div>
+  <div style="display:flex;flex-direction:column;gap:1rem;">
+    <div class="card anim" style="padding:1.5rem;">
+      <h3 style="font-family:var(--font);font-size:.95rem;font-weight:700;color:#fff;margin-bottom:.5rem;">What areas do you cover?</h3>
+      <p style="color:var(--muted);font-size:.85rem;line-height:1.7;">We currently serve university hostels, offices, and residential areas across Rawalpindi and Islamabad. Message us to confirm your specific location.</p>
+    </div>
+    <div class="card anim" style="padding:1.5rem;">
+      <h3 style="font-family:var(--font);font-size:.95rem;font-weight:700;color:#fff;margin-bottom:.5rem;">What if a garment gets damaged?</h3>
+      <p style="color:var(--muted);font-size:.85rem;line-height:1.7;">We handle every garment with care. In the rare event of damage, we will resolve it professionally and responsibly — your trust is our priority.</p>
+    </div>
+    <div class="card anim" style="padding:1.5rem;">
+      <h3 style="font-family:var(--font);font-size:.95rem;font-weight:700;color:#fff;margin-bottom:.5rem;">Is there a minimum order?</h3>
+      <p style="color:var(--muted);font-size:.85rem;line-height:1.7;">No minimum — even a single shirt is fine. But bulk orders (10+ items) qualify for a 10% discount, so it pays to send more at once.</p>
+    </div>
+    <div class="card anim" style="padding:1.5rem;">
+      <h3 style="font-family:var(--font);font-size:.95rem;font-weight:700;color:#fff;margin-bottom:.5rem;">How do I pay?</h3>
+      <p style="color:var(--muted);font-size:.85rem;line-height:1.7;">Cash on delivery, Easypaisa, or JazzCash. No advance payment required for first-time customers.</p>
+    </div>
+    <div class="card anim" style="padding:1.5rem;">
+      <h3 style="font-family:var(--font);font-size:.95rem;font-weight:700;color:#fff;margin-bottom:.5rem;">Can I track my order?</h3>
+      <p style="color:var(--muted);font-size:.85rem;line-height:1.7;">Yes! Use your Order ID on our <a href="track.html" style="color:var(--green-light);">Track Order</a> page to see real-time status from pickup to delivery.</p>
+    </div>
+  </div>
+</section>
+
+<section class="cta-section">
+  <h2>Ready to Get Started?</h2>
+  <p>Your first pickup is just one WhatsApp message away.</p>
+  <a href="order.html" class="btn btn-green btn-lg">Order Now →</a>
+</section>
+
+<footer class="footer">
+  <div class="footer-top">
+    <div class="footer-brand"><div class="nav-logo">Fresh<span>Fold</span></div><p>Professional laundry & ironing pickup across Rawalpindi and Islamabad.</p><div class="footer-social"><a class="social-btn" href="https://wa.me/923333333333" target="_blank">💬</a><a class="social-btn" href="#">📸</a></div></div>
+    <div class="footer-col"><h4>Pages</h4><a href="index.html">Home</a><a href="services.html">Services</a><a href="how-it-works.html">How It Works</a><a href="track.html">Track Order</a><a href="blog.html">Blog</a><a href="about.html">About</a></div>
+    <div class="footer-col"><h4>Contact</h4><p>📱 0333-3333333</p><p>💬 WhatsApp preferred</p><p>📍 Rawalpindi / Islamabad</p><p>🕐 Mon–Sat: 8AM–8PM</p></div>
+  </div>
+  <div class="footer-bottom"><p>© 2025 FreshFold. All rights reserved.</p></div>
+</footer>
+<a class="wa-float" href="https://wa.me/923333333333" target="_blank"><div class="wa-pulse"></div>💬</a>
+<script src="js/main.js"></script>
+</body>
+</html>

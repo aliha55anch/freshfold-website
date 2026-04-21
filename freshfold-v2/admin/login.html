@@ -1,0 +1,44 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8"/><meta name="viewport" content="width=device-width,initial-scale=1.0"/>
+  <title>Admin Login – FreshFold</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link href="https://fonts.googleapis.com/css2?family=Outfit:wght@400;600;700;800;900&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="../css/style.css">
+  <style>
+    body { display:flex; align-items:center; justify-content:center; min-height:100vh; }
+    .login-box { background:var(--card); border:1px solid var(--border); border-radius:20px; padding:2.5rem; width:100%; max-width:400px; box-shadow:var(--shadow); }
+    .login-logo { font-family:var(--font); font-size:1.6rem; font-weight:900; color:#fff; margin-bottom:.4rem; }
+    .login-logo span { background:linear-gradient(90deg,var(--green-light),var(--green-neon)); -webkit-background-clip:text; -webkit-text-fill-color:transparent; }
+    .login-sub  { color:var(--muted); font-size:.85rem; margin-bottom:2rem; }
+    .login-err  { display:none; background:rgba(239,68,68,.1); border:1px solid rgba(239,68,68,.3); border-radius:8px; padding:.75rem 1rem; color:#f87171; font-size:.84rem; margin-bottom:1rem; }
+  </style>
+</head>
+<body>
+<div class="login-box">
+  <div class="login-logo">Fresh<span>Fold</span></div>
+  <div class="login-sub">Admin Panel — Secure Login</div>
+  <div class="login-err" id="loginErr"></div>
+  <div class="form-group">
+    <label>Username</label>
+    <input class="form-control" id="loginUser" placeholder="admin" onkeydown="if(event.key==='Enter')adminLogin()">
+  </div>
+  <div class="form-group">
+    <label>Password</label>
+    <input class="form-control" type="password" id="loginPass" placeholder="••••••••" onkeydown="if(event.key==='Enter')adminLogin()">
+  </div>
+  <button class="btn btn-green" style="width:100%;justify-content:center;margin-top:.5rem;" onclick="adminLogin()">
+    Login to Admin Panel →
+  </button>
+  <p style="text-align:center;margin-top:1.5rem;">
+    <a href="../index.html" style="color:var(--muted);font-size:.8rem;">← Back to Website</a>
+  </p>
+</div>
+<script src="admin-api.js"></script>
+<script>
+  // Don't redirect if already on login page
+  document.addEventListener('DOMContentLoaded', () => {});
+</script>
+</body>
+</html>

@@ -1,0 +1,123 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8"/><meta name="viewport" content="width=device-width,initial-scale=1.0"/>
+  <title>Admin Panel – FreshFold</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link href="https://fonts.googleapis.com/css2?family=Outfit:wght@300;400;500;600;700;800;900&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="../css/style.css">
+</head>
+<body>
+<div class="admin-layout">
+
+  <!-- SIDEBAR -->
+  <aside class="admin-sidebar">
+    <div class="admin-logo">Fresh<span>Fold</span> <span style="font-size:.65rem;color:var(--muted);font-family:var(--font);font-weight:400;">Admin</span></div>
+    <nav class="admin-nav">
+      <a href="index.html" class="active">📊 Dashboard</a>
+      <a href="orders.html">📦 Orders</a>
+      <a href="blog-admin.html">✍️ Blog</a>
+      <a href="promos.html">🎟️ Promo Codes</a>
+      <a href="reviews-admin.html">⭐ Reviews</a>
+      <a href="../index.html" target="_blank">🌐 View Website</a>
+    </nav>
+    <div style="position:absolute;bottom:2rem;left:1.5rem;right:1.5rem;">
+      <div style="background:var(--green-faint);border:1px solid var(--border);border-radius:10px;padding:1rem;">
+        <p style="color:var(--green-light);font-size:.78rem;font-weight:600;margin-bottom:.3rem;">🟢 Service Status</p>
+        <p style="color:var(--muted);font-size:.72rem;">Active · Mon–Sat 8AM–8PM</p>
+      </div>
+    </div>
+  </aside>
+
+  <!-- MAIN -->
+  <main class="admin-main">
+    <div class="admin-header">
+      <h1>Dashboard</h1>
+      <div style="display:flex;gap:.8rem;align-items:center;">
+        <span style="color:var(--muted);font-size:.82rem;">Welcome back, Team FreshFold</span>
+        <div style="width:36px;height:36px;border-radius:50%;background:var(--green-faint);border:1px solid var(--border);display:flex;align-items:center;justify-content:center;">👤</div>
+      </div>
+    </div>
+
+    <!-- STATS -->
+    <div class="admin-stats">
+      <div class="a-stat">
+        <div class="a-s-val">47</div>
+        <div class="a-s-label">Total Orders This Month</div>
+      </div>
+      <div class="a-stat">
+        <div class="a-s-val" style="color:var(--gold);">8</div>
+        <div class="a-s-label">Pending Orders</div>
+      </div>
+      <div class="a-stat">
+        <div class="a-s-val">Rs. 38k</div>
+        <div class="a-s-label">Revenue This Month</div>
+      </div>
+      <div class="a-stat">
+        <div class="a-s-val">4.9★</div>
+        <div class="a-s-label">Average Rating</div>
+      </div>
+    </div>
+
+    <!-- RECENT ORDERS -->
+    <div class="admin-section">
+      <h2>Recent Orders</h2>
+      <table class="admin-table">
+        <thead>
+          <tr><th>Order ID</th><th>Customer</th><th>Items</th><th>Service</th><th>Total</th><th>Status</th><th>Action</th></tr>
+        </thead>
+        <tbody>
+          <tr>
+            <td><strong>FF-1042</strong></td><td>Ali Hassan</td><td>3 shirts, 2 pants</td><td>Ironing</td><td style="color:var(--green-light);font-weight:700;">Rs. 440</td>
+            <td><span class="status-badge sb-done">Delivered</span></td>
+            <td><button onclick="updateStatus('FF-1042')" style="background:var(--green-faint);color:var(--green-light);border:1px solid var(--border);border-radius:6px;padding:.3rem .7rem;cursor:pointer;font-size:.75rem;">Update</button></td>
+          </tr>
+          <tr>
+            <td><strong>FF-1041</strong></td><td>Sara Batool</td><td>1 full outfit</td><td>Wash+Iron</td><td style="color:var(--green-light);font-weight:700;">Rs. 400</td>
+            <td><span class="status-badge sb-progress">Processing</span></td>
+            <td><button onclick="updateStatus('FF-1041')" style="background:var(--green-faint);color:var(--green-light);border:1px solid var(--border);border-radius:6px;padding:.3rem .7rem;cursor:pointer;font-size:.75rem;">Update</button></td>
+          </tr>
+          <tr>
+            <td><strong>FF-1040</strong></td><td>Umar Farooq</td><td>5 shirts</td><td>Ironing</td><td style="color:var(--green-light);font-weight:700;">Rs. 400</td>
+            <td><span class="status-badge sb-pending">Pickup Pending</span></td>
+            <td><button onclick="updateStatus('FF-1040')" style="background:var(--green-faint);color:var(--green-light);border:1px solid var(--border);border-radius:6px;padding:.3rem .7rem;cursor:pointer;font-size:.75rem;">Update</button></td>
+          </tr>
+          <tr>
+            <td><strong>FF-1039</strong></td><td>Hina Malik</td><td>2 shalwar kameez</td><td>Ironing</td><td style="color:var(--green-light);font-weight:700;">Rs. 300</td>
+            <td><span class="status-badge sb-delivered">Delivered</span></td>
+            <td><button onclick="updateStatus('FF-1039')" style="background:var(--green-faint);color:var(--green-light);border:1px solid var(--border);border-radius:6px;padding:.3rem .7rem;cursor:pointer;font-size:.75rem;">Update</button></td>
+          </tr>
+        </tbody>
+      </table>
+    </div>
+
+    <!-- QUICK LINKS -->
+    <div style="display:grid;grid-template-columns:repeat(3,1fr);gap:1rem;">
+      <a href="blog-admin.html" class="card" style="padding:1.5rem;display:flex;align-items:center;gap:1rem;transition:border-color .2s;text-decoration:none;" onmouseover="this.style.borderColor='var(--green)'" onmouseout="this.style.borderColor='var(--border)'">
+        <div style="font-size:1.8rem;">✍️</div>
+        <div><strong style="color:#fff;font-size:.9rem;">Write Blog Post</strong><br><span style="color:var(--muted);font-size:.75rem;">Add or edit content</span></div>
+      </a>
+      <a href="promos.html" class="card" style="padding:1.5rem;display:flex;align-items:center;gap:1rem;transition:border-color .2s;text-decoration:none;" onmouseover="this.style.borderColor='var(--green)'" onmouseout="this.style.borderColor='var(--border)'">
+        <div style="font-size:1.8rem;">🎟️</div>
+        <div><strong style="color:#fff;font-size:.9rem;">Manage Promos</strong><br><span style="color:var(--muted);font-size:.75rem;">Create discount codes</span></div>
+      </a>
+      <a href="reviews-admin.html" class="card" style="padding:1.5rem;display:flex;align-items:center;gap:1rem;transition:border-color .2s;text-decoration:none;" onmouseover="this.style.borderColor='var(--green)'" onmouseout="this.style.borderColor='var(--border)'">
+        <div style="font-size:1.8rem;">⭐</div>
+        <div><strong style="color:#fff;font-size:.9rem;">View Reviews</strong><br><span style="color:var(--muted);font-size:.75rem;">Manage feedback</span></div>
+      </a>
+    </div>
+  </main>
+</div>
+
+<script src="../js/main.js"></script>
+<script>
+function updateStatus(id) {
+  const statuses = ['Order Placed','Pickup Scheduled','Picked Up','Being Processed','Out for Delivery','Delivered'];
+  const current = prompt(`Update status for ${id}:\n\n${statuses.map((s,i)=>`${i}: ${s}`).join('\n')}\n\nEnter number (0-5):`);
+  if (current !== null && statuses[parseInt(current)]) {
+    alert(`✅ Order ${id} updated to: ${statuses[parseInt(current)]}`);
+  }
+}
+</script>
+</body>
+</html>

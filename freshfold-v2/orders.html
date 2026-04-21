@@ -1,0 +1,149 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width,initial-scale=1.0" />
+  <title>Orders – FreshFold Admin</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link
+    href="https://fonts.googleapis.com/css2?family=Outfit:wght@300;400;500;600;700;800;900&display=swap"
+    rel="stylesheet">
+  <link rel="stylesheet" href="../css/style.css">
+</head>
+
+<body>
+  <div class="admin-layout">
+    <aside class="admin-sidebar">
+      <div class="admin-logo">Fresh<span>Fold</span> <span
+          style="font-size:.65rem;color:var(--muted);font-weight:400;">Admin</span></div>
+      <nav class="admin-nav">
+        <a href="index.html">📊 Dashboard</a>
+        <a href="orders.html" class="active">📦 Orders</a>
+        <a href="blog-admin.html">✍️ Blog</a>
+        <a href="promos.html">🎟️ Promo Codes</a>
+        <a href="reviews-admin.html">⭐ Reviews</a>
+        <a href="../index.html" target="_blank">🌐 View Website</a>
+      </nav>
+    </aside>
+
+    <main class="admin-main">
+      <div class="admin-header">
+        <h1>Orders</h1>
+        <div style="display:flex;gap:.8rem;">
+          <select id="filterStatus" class="form-control" style="width:auto;padding:.5rem 1rem;"
+            onchange="filterOrders()">
+            <option value="">All Statuses</option>
+            <option value="pending">Pending</option>
+            <option value="progress">Processing</option>
+            <option value="done">Done</option>
+            <option value="delivered">Delivered</option>
+          </select>
+        </div>
+      </div>
+
+      <div class="admin-stats">
+        <div class="a-stat">
+          <div class="a-s-val">47</div>
+          <div class="a-s-label">This Month</div>
+        </div>
+        <div class="a-stat">
+          <div class="a-s-val" style="color:var(--gold);">8</div>
+          <div class="a-s-label">Pending</div>
+        </div>
+        <div class="a-stat">
+          <div class="a-s-val" style="color:#60a5fa;">5</div>
+          <div class="a-s-label">In Progress</div>
+        </div>
+        <div class="a-stat">
+          <div class="a-s-val">34</div>
+          <div class="a-s-label">Delivered</div>
+        </div>
+      </div>
+
+      <div class="admin-section">
+        <h2>All Orders</h2>
+        <table class="admin-table" id="ordersTable">
+          <thead>
+            <tr>
+              <th>Order ID</th>
+              <th>Customer</th>
+              <th>Phone</th>
+              <th>Items</th>
+              <th>Service</th>
+              <th>Total</th>
+              <th>Placed</th>
+              <th>Status</th>
+              <th>Update</th>
+            </tr>
+          </thead>
+          <tbody id="ordersTbody"></tbody>
+        </table>
+      </div>
+    </main>
+  </div>
+
+  <script src="../js/main.js"></script>
+  <script>
+    const ORDERS = [
+      { id: 'FF-1042', name: 'Ali Hassan', phone: '0300-1111111', items: '3 shirts, 2 pants', service: 'Ironing', total: 'Rs. 440', date: 'Today 9:00 AM', status: 'done' },
+      { id: 'FF-1041', name: 'Sara Batool', phone: '0311-2222222', items: '1 full outfit', service: 'Wash+Iron', total: 'Rs. 400', date: 'Today 8:30 AM', status: 'progress' },
+      { id: 'FF-1040', name: 'Umar Farooq', phone: '0333-3333333', items: '5 shirts', service: 'Ironing', total: 'Rs. 400', date: 'Today 7:00 AM', status: 'pending' },
+      { id: 'FF-1039', name: 'Hina Malik', phone: '0321-4444444', items: '2 shalwar kameez', service: 'Ironing', total: 'Rs. 300', date: 'Yesterday', status: 'delivered' },
+      { id: 'FF-1038', name: 'Zubair Ahmed', phone: '0345-5555555', items: '1 suit', service: 'Ironing', total: 'Rs. 280', date: 'Yesterday', status: 'delivered' },
+      { id: 'FF-1037', name: 'Ayesha Noor', phone: '0312-6666666', items: '4 shirts, 1 dupatta', service: 'Ironing', total: 'Rs. 380', date: '2 days ago', status: 'delivered' },
+      { id: 'FF-1036', name: 'Bilal Rafiq', phone: '0300-7777777', items: '2 full outfits', service: 'Wash+Iron', total: 'Rs. 800', date: '2 days ago', status: 'delivered' },
+      { id: 'FF-1035', name: 'Fatima Sheikh', phone: '0322-8888888', items: '3 shalwar kameez', service: 'Ironing', total: 'Rs. 450', date: '3 days ago', status: 'delivered' },
+    ];
+
+    const STATUS_MAP = {
+      pending: { label: 'Pickup Pending', cls: 'sb-pending' },
+      progress: { label: 'Processing', cls: 'sb-progress' },
+      done: { label: 'Ready', cls: 'sb-done' },
+      delivered: { label: 'Delivered', cls: 'sb-delivered' },
+    };
+
+    let currentFilter = '';
+
+    function renderOrders(filter) {
+      const orders = filter ? ORDERS.filter(o => o.status === filter) : ORDERS;
+      const tbody = document.getElementById('ordersTbody');
+      tbody.innerHTML = orders.map(o => {
+        const s = STATUS_MAP[o.status];
+        return `<tr>
+      <td><strong style="color:#fff">${o.id}</strong></td>
+      <td>${o.name}</td>
+      <td style="color:var(--muted)">${o.phone}</td>
+      <td style="color:var(--muted);max-width:160px;">${o.items}</td>
+      <td><span class="badge badge-green">${o.service}</span></td>
+      <td style="color:var(--green-light);font-weight:700;">${o.total}</td>
+      <td style="color:var(--muted)">${o.date}</td>
+      <td><span class="status-badge ${s.cls}">${s.label}</span></td>
+      <td>
+        <select onchange="changeStatus('${o.id}',this.value)" style="background:var(--dark2);border:1px solid var(--border);border-radius:6px;color:#fff;font-size:.75rem;padding:.3rem .5rem;cursor:pointer;">
+          <option value="pending"   ${o.status === 'pending' ? 'selected' : ''}>Pending</option>
+          <option value="progress"  ${o.status === 'progress' ? 'selected' : ''}>Processing</option>
+          <option value="done"      ${o.status === 'done' ? 'selected' : ''}>Ready</option>
+          <option value="delivered" ${o.status === 'delivered' ? 'selected' : ''}>Delivered</option>
+        </select>
+      </td>
+    </tr>`;
+      }).join('');
+    }
+
+    function filterOrders() {
+      currentFilter = document.getElementById('filterStatus').value;
+      renderOrders(currentFilter);
+    }
+
+    function changeStatus(id, newStatus) {
+      const o = ORDERS.find(o => o.id === id);
+      if (o) { o.status = newStatus; renderOrders(currentFilter); }
+    }
+
+    renderOrders('');
+  </script>
+  <script src="js/api.js"></script>
+</body>
+
+</html>

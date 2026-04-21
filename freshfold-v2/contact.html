@@ -1,0 +1,130 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8"/><meta name="viewport" content="width=device-width,initial-scale=1.0"/>
+  <title>Contact - FreshFold</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link href="https://fonts.googleapis.com/css2?family=Outfit:wght@300;400;500;600;700;800;900&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="css/style.css">
+</head>
+<body>
+<nav class="navbar">
+  <div class="nav-logo">Fresh<span>Fold</span></div>
+  <ul class="nav-links">
+    <li><a href="index.html">Home</a></li><li><a href="services.html">Services</a></li>
+    <li><a href="how-it-works.html">How It Works</a></li><li><a href="track.html">Track Order</a></li>
+    <li><a href="blog.html">Blog</a></li><li><a href="about.html">About</a></li>
+    <li><a href="contact.html" class="active">Contact</a></li>
+  </ul>
+  <div class="nav-right"><a href="order.html" class="btn btn-green">Order Now</a></div>
+  <div class="hamburger" onclick="toggleMenu()">&#9776;</div>
+</nav>
+<div class="mobile-menu" id="mobileMenu">
+  <a href="index.html">Home</a><a href="services.html">Services</a><a href="how-it-works.html">How It Works</a>
+  <a href="track.html">Track Order</a><a href="blog.html">Blog</a><a href="about.html">About</a>
+  <a href="contact.html">Contact</a><a href="order.html" class="btn btn-green">Order Now</a>
+</div>
+
+<section class="page-hero contact-hero">
+  <h1>Contact FreshFold</h1>
+  <p>Reach the team for bookings, order questions, pricing, or partnerships. WhatsApp is the fastest way to get a reply.</p>
+</section>
+
+<section class="contact-section">
+  <div class="contact-grid">
+    <div class="contact-info">
+      <div class="contact-panel contact-primary">
+        <span class="tag">Contact Desk</span>
+        <h2>Professional support for every pickup</h2>
+        <p>Share your address, item count, and preferred pickup time, and our team will guide you through the next step quickly and clearly.</p>
+
+        <div class="contact-highlights">
+          <div class="contact-highlight">
+            <strong>Quick response</strong>
+            <span>We usually reply within a few minutes during working hours.</span>
+          </div>
+          <div class="contact-highlight">
+            <strong>Direct coordination</strong>
+            <span>Talk to the same team managing your pickup, processing, and delivery.</span>
+          </div>
+        </div>
+
+        <a href="https://wa.me/923333333333?text=Hi%20FreshFold!%20I'd%20like%20to%20book%20a%20pickup." class="wa-btn-big" target="_blank">Start WhatsApp Chat</a>
+      </div>
+
+      <div class="contact-card-grid">
+        <div class="c-item">
+          <div class="c-icon">💬</div>
+          <div class="c-text"><strong>WhatsApp</strong><span>0333-3333333</span></div>
+        </div>
+        <div class="c-item">
+          <div class="c-icon">📞</div>
+          <div class="c-text"><strong>Phone</strong><span>0333-3333333</span></div>
+        </div>
+        <div class="c-item">
+          <div class="c-icon">📍</div>
+          <div class="c-text"><strong>Coverage</strong><span>Rawalpindi and Islamabad</span></div>
+        </div>
+        <div class="c-item">
+          <div class="c-icon">🕐</div>
+          <div class="c-text"><strong>Working Hours</strong><span>Monday to Saturday, 8:00 AM to 8:00 PM</span></div>
+        </div>
+      </div>
+    </div>
+
+    <div class="contact-panel contact-form-panel">
+      <div class="contact-form-head">
+        <span class="tag">Message Form</span>
+        <h3>Send us your details</h3>
+        <p>Use this form to prepare a ready-to-send WhatsApp message with your request.</p>
+      </div>
+
+      <div id="contactSuccess" class="contact-success">Message prepared successfully. Continue in WhatsApp.</div>
+
+      <div class="contact-form-box">
+        <div class="form-group"><label>Your Name</label><input class="form-control" id="cName" placeholder="e.g. Ali Khan"></div>
+        <div class="form-group"><label>WhatsApp Number</label><input class="form-control" id="cPhone" placeholder="0333-3333333"></div>
+        <div class="form-group"><label>Subject</label>
+          <select class="form-control" id="cSubject">
+            <option>I want to place an order</option><option>Pricing question</option>
+            <option>Track my order</option><option>Complaint / Feedback</option><option>Partnership / Sponsorship</option><option>Other</option>
+          </select>
+        </div>
+        <div class="form-group"><label>Message</label><textarea class="form-control" id="cMsg" placeholder="Write your message here..."></textarea></div>
+        <button class="btn btn-green contact-submit" onclick="sendContact()">Send via WhatsApp</button>
+      </div>
+    </div>
+  </div>
+</section>
+
+<section class="cta-section contact-cta">
+  <h2>Ready to place your order?</h2>
+  <p>Skip the form and go straight to the order page to schedule your pickup.</p>
+  <a href="order.html" class="btn btn-green btn-lg">Order Now</a>
+</section>
+
+<footer class="footer">
+  <div class="footer-top">
+    <div class="footer-brand"><div class="nav-logo">Fresh<span>Fold</span></div><p>Professional laundry and ironing pickup across Rawalpindi and Islamabad.</p><div class="footer-social"><a class="social-btn" href="https://wa.me/923333333333" target="_blank">💬</a><a class="social-btn" href="#">📸</a></div></div>
+    <div class="footer-col"><h4>Pages</h4><a href="index.html">Home</a><a href="services.html">Services</a><a href="how-it-works.html">How It Works</a><a href="track.html">Track Order</a><a href="blog.html">Blog</a><a href="about.html">About</a></div>
+    <div class="footer-col"><h4>Team</h4><p>M. Ali Hassan</p><p>Abdullah Zeeshan</p><p>M. Zain Ul Abideen</p><p>Rubab Ikram</p><p>Manahal Ijaz</p></div>
+    <div class="footer-col"><h4>Contact</h4><p>0333-3333333</p><p>WhatsApp preferred</p><p>Rawalpindi / Islamabad</p><p>Mon-Sat: 8AM-8PM</p></div>
+  </div>
+  <div class="footer-bottom"><p>© 2025 FreshFold. All rights reserved.</p></div>
+</footer>
+<a class="wa-float" href="https://wa.me/923333333333" target="_blank"><div class="wa-pulse"></div>💬</a>
+<script src="js/main.js"></script>
+<script>
+function sendContact() {
+  const name = document.getElementById('cName').value.trim();
+  const phone = document.getElementById('cPhone').value.trim();
+  const subject = document.getElementById('cSubject').value;
+  const msg = document.getElementById('cMsg').value.trim();
+  if (!name || !phone) { alert('Please enter name and WhatsApp number.'); return; }
+  const text = `Hi FreshFold!\n\nName: ${name}\nPhone: ${phone}\nSubject: ${subject}\n\nMessage: ${msg || '(no message)'}`;
+  window.open(`https://wa.me/923333333333?text=${encodeURIComponent(text)}`, '_blank');
+  document.getElementById('contactSuccess').style.display = 'block';
+}
+</script>
+</body>
+</html>

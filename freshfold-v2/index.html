@@ -1,0 +1,337 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8"/><meta name="viewport" content="width=device-width,initial-scale=1.0"/>
+  <title>FreshFold – Laundry & Ironing Pickup Service</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link href="https://fonts.googleapis.com/css2?family=Outfit:wght@300;400;500;600;700;800;900&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="css/style.css">
+  
+</head>
+<body>
+
+<!-- NAVBAR -->
+<nav class="navbar">
+  <div class="nav-logo">Fresh<span>Fold</span></div>
+  <ul class="nav-links">
+    <li><a href="index.html" class="active">Home</a></li>
+    <li><a href="services.html">Services</a></li>
+    <li><a href="how-it-works.html">How It Works</a></li>
+    <li><a href="track.html">Track Order</a></li>
+    <li><a href="blog.html">Blog</a></li>
+    <li><a href="about.html">About</a></li>
+    <li><a href="contact.html">Contact</a></li>
+  </ul>
+  <div class="nav-right"><a href="order.html" class="btn btn-green">Order Now</a></div>
+  <div class="hamburger" onclick="toggleMenu()">&#9776;</div>
+</nav>
+<div class="mobile-menu" id="mobileMenu">
+  <a href="index.html">Home</a><a href="services.html">Services</a>
+  <a href="how-it-works.html">How It Works</a><a href="track.html">Track Order</a>
+  <a href="blog.html">Blog</a><a href="about.html">About</a><a href="contact.html">Contact</a>
+  <a href="order.html" class="btn btn-green">Order Now</a>
+</div>
+
+<!-- ══ HERO ══ -->
+<section class="hero">
+  <!-- <div class="hero-orb orb-1"></div>
+  <div class="hero-orb orb-2"></div>
+  <div class="hero-orb orb-3"></div> -->
+
+  <div class="hero-left">
+    <div class="hero-eyebrow">
+      <span class="eyebrow-dot"></span>
+      Serving Rawalpindi, Islamabad & Surrounding Areas
+    </div>
+    <h1 class="hero-headline">
+      <span class="hl-1">Fresh Clothes,</span>
+      <span class="hl-2">Zero Hassle.</span>
+    </h1>
+    <p class="hero-sub">Professional laundry &amp; ironing pickup for students, office workers, and busy families. Schedule on WhatsApp — we handle everything else.</p>
+    <div class="hero-cta">
+      <a href="order.html" class="btn btn-green">Schedule Pickup &nbsp;→</a>
+      <a href="track.html" class="btn btn-outline">Track My Order</a>
+    </div>
+    <div class="hero-trust">
+      <div class="trust-item"><span class="trust-val">500+</span><span class="trust-lbl">Customers</span></div>
+      <div class="trust-item"><span class="trust-val">24hr</span><span class="trust-lbl">Turnaround</span></div>
+      <div class="trust-item"><span class="trust-val">Rs.80</span><span class="trust-lbl">Per Shirt</span></div>
+      <div class="trust-item"><span class="trust-val">4.9★</span><span class="trust-lbl">Rating</span></div>
+    </div>
+  </div>
+
+  <div class="hero-right">
+    <div class="hero-float">🎉 New: Express 12hr Service</div>
+    <div class="hero-main-card">
+      <div class="card-hdr">
+        <span class="card-lbl">Live Orders</span>
+        <span class="live-pill"><span class="live-dot"></span> Live</span>
+      </div>
+      <div class="order-row">
+        <div class="or-ico">📦</div>
+        <div class="or-info"><div class="or-name">Order FF-1042 — Ali Hassan</div><div class="or-sub">3 shirts · 2 pants — ironed &amp; packed</div></div>
+        <span class="or-badge b-done">Done ✓</span>
+      </div>
+      <div class="order-row">
+        <div class="or-ico">🚴</div>
+        <div class="or-info"><div class="or-name">Order FF-1041 — Sara Batool</div><div class="or-sub">1 full outfit — rider en route</div></div>
+        <span class="or-badge b-route">En Route</span>
+      </div>
+      <div class="order-row">
+        <div class="or-ico">🧹</div>
+        <div class="or-info"><div class="or-name">Order FF-1040 — Umar Farooq</div><div class="or-sub">5 shirts — wash + iron</div></div>
+        <span class="or-badge b-proc">Processing</span>
+      </div>
+      <div class="prog-wrap">
+        <div class="prog-hdr"><span class="prog-lbl">Today's orders completed</span><span class="prog-pct">68%</span></div>
+        <div class="prog-bar"><div class="prog-fill"></div></div>
+      </div>
+    </div>
+    <div class="mini-row">
+      <div class="mini-card"><div class="mc-ico">⚡</div><div class="mc-val">12hr</div><div class="mc-lbl">Express option</div></div>
+      <div class="mini-card"><div class="mc-ico">💸</div><div class="mc-val">15%</div><div class="mc-lbl">Bulk discount</div></div>
+    </div>
+  </div>
+</section>
+
+<!-- TICKER -->
+<div class="ticker">
+  <div class="ticker-track">
+    <span class="ticker-item"><span class="t-dot"></span>Free Pickup &amp; Delivery</span>
+    <span class="ticker-item"><span class="t-dot"></span>24hr Turnaround</span>
+    <span class="ticker-item"><span class="t-dot"></span>Express 12hr Available</span>
+    <span class="ticker-item"><span class="t-dot"></span>WhatsApp Ordering</span>
+    <span class="ticker-item"><span class="t-dot"></span>Student Discounts</span>
+    <span class="ticker-item"><span class="t-dot"></span>Code: FRESH20</span>
+    <span class="ticker-item"><span class="t-dot"></span>Rawalpindi, Islamabad & Surrounding</span>
+    <span class="ticker-item"><span class="t-dot"></span>Professional Results</span>
+    <span class="ticker-item"><span class="t-dot"></span>Free Pickup &amp; Delivery</span>
+    <span class="ticker-item"><span class="t-dot"></span>24hr Turnaround</span>
+    <span class="ticker-item"><span class="t-dot"></span>Express 12hr Available</span>
+    <span class="ticker-item"><span class="t-dot"></span>WhatsApp Ordering</span>
+    <span class="ticker-item"><span class="t-dot"></span>Student Discounts</span>
+    <span class="ticker-item"><span class="t-dot"></span>Code: FRESH20</span>
+    <span class="ticker-item"><span class="t-dot"></span>Rawalpindi, Islamabad & Surrounding</span>
+    <span class="ticker-item"><span class="t-dot"></span>Professional Results</span>
+  </div>
+</div>
+
+<!-- ══ FEATURES BENTO ══ -->
+<section class="features-section">
+  <div class="sec-head">
+    <span class="tag">Why FreshFold</span>
+    <h2>Everything You Need, Nothing You Don't</h2>
+    <p>Built around the real problems of students and working professionals.</p>
+  </div>
+  <div class="bento-grid">
+    <div class="bento-card bento-wide bento-accent anim">
+      <div class="bc-ico">🚴</div>
+      <div class="bc-title">Free Pickup &amp; Doorstep Delivery</div>
+      <div class="bc-desc">We come to your hostel, home, or office. No transport cost, no extra charges — just send a WhatsApp and our rider handles everything.</div>
+      <div class="bc-chips">
+        <span class="chip"><span class="chip-dot"></span>Hostel rooms</span>
+        <span class="chip"><span class="chip-dot"></span>Office buildings</span>
+        <span class="chip"><span class="chip-dot"></span>Residential areas</span>
+        <span class="chip"><span class="chip-dot"></span>University campuses</span>
+      </div>
+    </div>
+    <div class="bento-card anim">
+      <div class="bc-ico">⚡</div>
+      <div class="bc-title">12hr Express</div>
+      <div class="bc-desc">Urgent meeting tomorrow? Drop off in the morning, get back the same evening.</div>
+    </div>
+    <div class="bento-card anim">
+      <div class="bc-num">4.9★</div>
+      <div class="bc-title">Top Rated</div>
+      <div class="bc-desc">Over 120 verified reviews from real customers across Rawalpindi.</div>
+    </div>
+    <div class="bento-card anim">
+      <div class="bc-ico">📱</div>
+      <div class="bc-title">WhatsApp Ordering</div>
+      <div class="bc-desc">No app, no account. Just message — confirmed in minutes.</div>
+    </div>
+    <div class="bento-card anim">
+      <div class="bc-num">15%</div>
+      <div class="bc-title">Bulk Discount</div>
+      <div class="bc-desc">10+ items = 10% off. 20+ items = 15% off. Automatically applied.</div>
+    </div>
+    <div class="bento-card anim">
+      <div class="bc-ico">🔍</div>
+      <div class="bc-title">Live Order Tracking</div>
+      <div class="bc-desc">Track from pickup to delivery with your unique order ID.</div>
+    </div>
+  </div>
+</section>
+
+<!-- ══ STEPS TIMELINE ══ -->
+<section class="steps-section">
+  <div class="sec-head">
+    <span class="tag">The Process</span>
+    <h2>5 Steps. 24 Hours. Done.</h2>
+    <p>From your door, back to your door — completely handled.</p>
+  </div>
+  <div class="timeline">
+    <div class="tl-step anim"><div class="tl-num">01</div><div class="tl-emoji">📅</div><div class="tl-title">Schedule</div><div class="tl-desc">WhatsApp or order form — book your slot.</div></div>
+    <div class="tl-step anim"><div class="tl-num">02</div><div class="tl-emoji">🚴</div><div class="tl-title">Pickup</div><div class="tl-desc">Rider at your door at the agreed time.</div></div>
+    <div class="tl-step anim"><div class="tl-num">03</div><div class="tl-emoji">🧹</div><div class="tl-title">Process</div><div class="tl-desc">Washed and/or ironed professionally.</div></div>
+    <div class="tl-step anim"><div class="tl-num">04</div><div class="tl-emoji">📦</div><div class="tl-title">Pack</div><div class="tl-desc">Folded in clean branded bags.</div></div>
+    <div class="tl-step anim"><div class="tl-num">05</div><div class="tl-emoji">🏠</div><div class="tl-title">Deliver</div><div class="tl-desc">Back at your door in 24hrs.</div></div>
+  </div>
+</section>
+
+<!-- ══ PRICING PREVIEW ══ -->
+<section class="pricing-preview">
+  <div class="sec-head">
+    <span class="tag">Pricing</span>
+    <h2>Simple, Honest Prices</h2>
+    <p>No hidden charges. Per item, every time.</p>
+  </div>
+  <div class="price-preview-grid">
+    <div class="pp-card anim"><div class="pp-emoji">👔</div><div class="pp-name">Shirt</div><div class="pp-price"><sub>Rs.</sub>80</div><div class="pp-exp">⚡ Express Rs. 130</div></div>
+    <div class="pp-card pp-feat anim"><div class="pp-emoji">🎽</div><div class="pp-name">Full Outfit</div><div class="pp-price"><sub>Rs.</sub>250</div><div class="pp-exp">⚡ Express Rs. 350</div></div>
+    <div class="pp-card anim"><div class="pp-emoji">👖</div><div class="pp-name">Pants</div><div class="pp-price"><sub>Rs.</sub>110</div><div class="pp-exp">⚡ Express Rs. 160</div></div>
+  </div>
+  <div class="center-text"><a href="services.html" class="btn btn-outline">See Full Pricing →</a></div>
+</section>
+
+<!-- ══ REVIEWS ══ -->
+<section class="reviews-section">
+  <div class="sec-head">
+    <span class="tag">Reviews</span>
+    <h2>Trusted by Hundreds</h2>
+    <p>Real feedback from students and professionals across Rawalpindi.</p>
+  </div>
+  <div class="reviews-bento">
+    <div class="rv-card rv-large anim" >
+      <div class="rv-big-quote">"</div>
+      <div class="rv-stars">★★★★★</div>
+      <p class="rv-text">Honestly the best service I've found in Rawalpindi. Clothes come back looking brand new every single time. As an office worker I can't afford to look unprofessional — FreshFold makes sure I never do. The express option has saved me before multiple important meetings.</p>
+      <div class="rv-author"><div class="rv-avatar">👩‍💼</div><div><div class="rv-name">Nadia Akhtar</div><div class="rv-role">HR Executive, Rawalpindi</div></div></div>
+    </div>
+    <div class="rv-card anim">
+      <div class="rv-big-quote">"</div>
+      <div class="rv-stars">★★★★★</div>
+      <p class="rv-text">Perfect for hostel life. Clothes come back perfectly ironed, on time, every single time.</p>
+      <div class="rv-author"><div class="rv-avatar">👨‍🎓</div><div><div class="rv-name">Bilal Rafiq</div><div class="rv-role">Student, COMSATS</div></div></div>
+    </div>
+    <div class="rv-card anim">
+      <div class="rv-big-quote">"</div>
+      <div class="rv-stars">★★★★☆</div>
+      <p class="rv-text">Great rates and really professional packing. The promo code gave a real discount on my first order.</p>
+      <div class="rv-author"><div class="rv-avatar">👨</div><div><div class="rv-name">Hamza Tariq</div><div class="rv-role">Student, Arid University</div></div></div>
+    </div>
+  </div>
+  <div id="dynamicReviews" class="reviews-bento"></div>
+  <div class="center-text"><a href="reviews.html" class="btn btn-outline">See All Reviews →</a></div>
+</section>
+
+<!-- ══ PROMO ══ -->
+<section class="promo-section">
+  <div class="promo-split">
+    <div>
+      <div class="promo-badge">🎟️ Discount Codes</div>
+      <h2>Save on Every Order</h2>
+      <p>Real discounts — not gimmicks. Pick a code, apply at checkout, save instantly.</p>
+      <div class="code-list">
+        <div class="code-pill" onclick="useCode('FRESH20')"><span class="cp-code">FRESH20</span><span class="cp-desc">20% off any order</span><span class="cp-action">Use →</span></div>
+        <div class="code-pill" onclick="useCode('STUDENT10')"><span class="cp-code">STUDENT10</span><span class="cp-desc">10% student discount</span><span class="cp-action">Use →</span></div>
+        <div class="code-pill" onclick="useCode('FIRST50')"><span class="cp-code">FIRST50</span><span class="cp-desc">Rs. 50 off first order</span><span class="cp-action">Use →</span></div>
+        <div class="code-pill" onclick="useCode('BULK15')"><span class="cp-code">BULK15</span><span class="cp-desc">15% on bulk orders</span><span class="cp-action">Use →</span></div>
+      </div>
+    </div>
+    <div class="promo-form-wrap">
+      <h3>Have a code? Try it now</h3>
+      <input class="promo-inp" id="promoCode" placeholder="Enter promo code" onkeydown="if(event.key==='Enter')applyPromo()">
+      <button class="btn btn-green" onclick="applyPromo()">Apply Discount</button>
+      <p class="promo-res" id="promoResult"></p>
+    </div>
+  </div>
+</section>
+
+<!-- ══ SPONSORS ══ -->
+<section class="sponsors-section">
+  <div class="sec-head">
+    <span class="tag">Our Sponsors</span>
+    <h2>Proudly Supported By</h2>
+    <p>Local businesses that believe in the FreshFold mission.</p>
+  </div>
+  <div class="sp-overflow">
+    <div class="sp-track">
+      <div class="sp-card"><div class="sp-logo">🏪</div><div><div class="sp-name">CleanPro Supplies</div><div class="sp-type">Equipment Sponsor</div></div></div>
+      <div class="sp-card"><div class="sp-logo">🛵</div><div><div class="sp-name">RWP Riders Co.</div><div class="sp-type">Logistics Partner</div></div></div>
+      <div class="sp-card"><div class="sp-logo">🧴</div><div><div class="sp-name">FabricCare PK</div><div class="sp-type">Product Sponsor</div></div></div>
+      <div class="sp-card"><div class="sp-logo">🏫</div><div><div class="sp-name">Arid Plaza Market</div><div class="sp-type">Distribution Partner</div></div></div>
+      <div class="sp-card"><div class="sp-logo">📦</div><div><div class="sp-name">PackRight Pakistan</div><div class="sp-type">Packaging Sponsor</div></div></div>
+      <div class="sp-card"><div class="sp-logo">💻</div><div><div class="sp-name">TechBase RWP</div><div class="sp-type">Tech Sponsor</div></div></div>
+      <!-- duplicate -->
+      <div class="sp-card"><div class="sp-logo">🏪</div><div><div class="sp-name">CleanPro Supplies</div><div class="sp-type">Equipment Sponsor</div></div></div>
+      <div class="sp-card"><div class="sp-logo">🛵</div><div><div class="sp-name">RWP Riders Co.</div><div class="sp-type">Logistics Partner</div></div></div>
+      <div class="sp-card"><div class="sp-logo">🧴</div><div><div class="sp-name">FabricCare PK</div><div class="sp-type">Product Sponsor</div></div></div>
+      <div class="sp-card"><div class="sp-logo">🏫</div><div><div class="sp-name">Arid Plaza Market</div><div class="sp-type">Distribution Partner</div></div></div>
+      <div class="sp-card"><div class="sp-logo">📦</div><div><div class="sp-name">PackRight Pakistan</div><div class="sp-type">Packaging Sponsor</div></div></div>
+      <div class="sp-card"><div class="sp-logo">💻</div><div><div class="sp-name">TechBase RWP</div><div class="sp-type">Tech Sponsor</div></div></div>
+    </div>
+  </div>
+  <div class="center-text"><a href="about.html#sponsors" class="btn btn-ghost">View All Sponsors →</a></div>
+</section>
+
+<!-- ══ CTA SPLIT ══ -->
+<section class="cta-section">
+  <div class="cta-glow"></div>
+  <div class="cta-split">
+    <div class="anim">
+      <h2>Your First Pickup is<br><em>One Message Away</em></h2>
+      <p>Join hundreds of students and professionals across Rawalpindi who save time every week with FreshFold.</p>
+      <div class="cta-btns">
+        <a href="order.html" class="btn btn-green">Book Pickup Now →</a>
+        <a href="how-it-works.html" class="btn btn-outline">How It Works</a>
+      </div>
+    </div>
+    <div class="cta-box anim">
+      <div class="cta-fact"><div class="cf-ico">🚴</div><div><span class="cf-strong">Free pickup from your door</span><span class="cf-muted">Hostels, homes, offices — no transport cost</span></div></div>
+      <div class="cta-fact"><div class="cf-ico">⚡</div><div><span class="cf-strong">Back in 24hrs (or 12hr express)</span><span class="cf-muted">Standard and express options available</span></div></div>
+      <div class="cta-fact"><div class="cf-ico">💳</div><div><span class="cf-strong">Pay on delivery</span><span class="cf-muted">Cash, Easypaisa or JazzCash — no advance</span></div></div>
+      <div class="cta-fact"><div class="cf-ico">🎟️</div><div><span class="cf-strong">First order: use FIRST50</span><span class="cf-muted">Rs. 50 off — no minimum required</span></div></div>
+    </div>
+  </div>
+</section>
+
+<!-- FOOTER -->
+<footer class="footer">
+  <div class="footer-top">
+    <div class="footer-brand">
+      <div class="nav-logo">Fresh<span>Fold</span></div>
+      <p>Professional laundry &amp; ironing pickup service for students, workers &amp; families across Rawalpindi and Islamabad.</p>
+      <div class="footer-social">
+        <a class="social-btn" href="https://wa.me/923333333333" target="_blank">💬</a>
+        <a class="social-btn" href="#" target="_blank">📸</a>
+      </div>
+    </div>
+    <div class="footer-col"><h4>Pages</h4>
+      <a href="index.html">Home</a><a href="services.html">Services</a>
+      <a href="how-it-works.html">How It Works</a><a href="track.html">Track Order</a>
+      <a href="blog.html">Blog</a><a href="about.html">About</a>
+    </div>
+    <div class="footer-col"><h4>Services</h4>
+      <a href="services.html">Ironing Only</a><a href="services.html">Wash + Iron</a>
+      <a href="services.html">Express 12hr</a><a href="services.html">Monthly Plans</a>
+    </div>
+    <div class="footer-col"><h4>Contact</h4>
+      <p>📱 0333-3333333</p><p>💬 WhatsApp preferred</p>
+      <p>📍 Rawalpindi, Islamabad & Surrounding Areas</p><p>🕐 Mon–Sat: 8AM–8PM</p>
+    </div>
+  </div>
+  <div class="footer-bottom">
+    <p>© 2025 FreshFold. All rights reserved.</p>
+    <p><a href="admin/index.html" style="color:var(--muted);font-size:.75rem;">Admin Panel</a></p>
+  </div>
+</footer>
+
+<a class="wa-float" href="https://wa.me/923333333333?text=Hi%20FreshFold!%20I'd%20like%20to%20place%20an%20order." target="_blank">
+  <div class="wa-pulse"></div>💬
+</a>
+
+<script src="js/main.js"></script>
+<script src="js/api.js"></script>
+</body>
+</html>

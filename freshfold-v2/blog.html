@@ -1,0 +1,82 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8"/><meta name="viewport" content="width=device-width,initial-scale=1.0"/>
+  <title>Blog – FreshFold</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link href="https://fonts.googleapis.com/css2?family=Outfit:wght@300;400;500;600;700;800;900&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="css/style.css">
+</head>
+<body>
+<nav class="navbar">
+  <div class="nav-logo">Fresh<span>Fold</span></div>
+  <ul class="nav-links">
+    <li><a href="index.html">Home</a></li><li><a href="services.html">Services</a></li>
+    <li><a href="how-it-works.html">How It Works</a></li><li><a href="track.html">Track Order</a></li>
+    <li><a href="blog.html" class="active">Blog</a></li><li><a href="about.html">About</a></li><li><a href="contact.html">Contact</a></li>
+  </ul>
+  <div class="nav-right"><a href="order.html" class="btn btn-green">Order Now</a></div>
+  <div class="hamburger" onclick="toggleMenu()">&#9776;</div>
+</nav>
+<div class="mobile-menu" id="mobileMenu">
+  <a href="index.html">Home</a><a href="services.html">Services</a><a href="how-it-works.html">How It Works</a>
+  <a href="track.html">Track Order</a><a href="blog.html">Blog</a><a href="about.html">About</a>
+  <a href="contact.html">Contact</a><a href="order.html" class="btn btn-green">Order Now</a>
+</div>
+
+<section class="page-hero">
+  <h1>FreshFold Blog</h1>
+  <p>Laundry tips, business updates, and guides for students and working professionals.</p>
+</section>
+
+<section class="blog-section">
+  <div class="sec-head">
+    <span class="tag">Latest Posts</span>
+    <h2>From the FreshFold Team</h2>
+  </div>
+  <div class="blog-grid" id="blogGrid">
+    <!-- Rendered by blog.js -->
+    <div style="grid-column:1/-1;text-align:center;padding:3rem;color:var(--muted);">Loading posts...</div>
+  </div>
+</section>
+
+<section class="cta-section">
+  <h2>Ready to Save Time?</h2>
+  <p>Book your laundry pickup today and never worry about ironing again.</p>
+  <a href="order.html" class="btn btn-green btn-lg">Order Now →</a>
+</section>
+
+<footer class="footer">
+  <div class="footer-top">
+    <div class="footer-brand">
+      <div class="nav-logo">Fresh<span>Fold</span></div>
+      <p>Professional laundry &amp; ironing pickup service for students, workers &amp; families across Rawalpindi and Islamabad.</p>
+      <div class="footer-social">
+        <a class="social-btn" href="https://wa.me/923333333333" target="_blank">💬</a>
+        <a class="social-btn" href="#" target="_blank">📸</a>
+      </div>
+    </div>
+    <div class="footer-col"><h4>Pages</h4>
+      <a href="index.html">Home</a><a href="services.html">Services</a>
+      <a href="how-it-works.html">How It Works</a><a href="track.html">Track Order</a>
+      <a href="blog.html">Blog</a><a href="about.html">About</a>
+    </div>
+    <div class="footer-col"><h4>Services</h4>
+      <a href="services.html">Ironing Only</a><a href="services.html">Wash + Iron</a>
+      <a href="services.html">Express 12hr</a><a href="services.html">Monthly Plans</a>
+    </div>
+    <div class="footer-col"><h4>Contact</h4>
+      <p>📱 0333-3333333</p><p>💬 WhatsApp preferred</p>
+      <p>📍 Rawalpindi / Islamabad</p><p>🕐 Mon–Sat: 8AM–8PM</p>
+    </div>
+  </div>
+  <div class="footer-bottom">
+    <p>© 2025 FreshFold. All rights reserved.</p>
+    <p><a href="admin/index.html" style="color:var(--muted);font-size:.75rem;">Admin Panel</a></p>
+  </div>
+</footer>
+<a class="wa-float" href="https://wa.me/923333333333" target="_blank"><div class="wa-pulse"></div>💬</a>
+<script src="js/main.js"></script>
+<script src="js/blog.js"></script>
+</body>
+</html>

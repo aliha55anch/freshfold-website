@@ -1,0 +1,135 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8"/><meta name="viewport" content="width=device-width,initial-scale=1.0"/>
+  <title>Blog Admin – FreshFold</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link href="https://fonts.googleapis.com/css2?family=Outfit:wght@300;400;500;600;700;800;900&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="../css/style.css">
+</head>
+<body>
+<div class="admin-layout">
+  <aside class="admin-sidebar">
+    <div class="admin-logo">Fresh<span>Fold</span> <span style="font-size:.65rem;color:var(--muted);font-family:var(--font);font-weight:400;">Admin</span></div>
+    <nav class="admin-nav">
+      <a href="index.html">📊 Dashboard</a>
+      <a href="orders.html">📦 Orders</a>
+      <a href="blog-admin.html" class="active">✍️ Blog</a>
+      <a href="promos.html">🎟️ Promo Codes</a>
+      <a href="reviews-admin.html">⭐ Reviews</a>
+      <a href="../index.html" target="_blank">🌐 View Website</a>
+    </nav>
+  </aside>
+
+  <main class="admin-main">
+    <div class="admin-header">
+      <h1>Blog Management</h1>
+      <button class="btn btn-green" onclick="clearPostForm()">+ New Post</button>
+    </div>
+
+    <!-- WRITE / EDIT FORM -->
+    <div class="admin-section" id="postForm">
+      <h2 id="postFormTitle">Write New Post</h2>
+      <input type="hidden" id="editPostId">
+      <div class="form-row">
+        <div class="form-group">
+          <label>Post Title *</label>
+          <input class="form-control" id="postTitle" placeholder="e.g. 5 Tips for Perfect Ironing">
+        </div>
+        <div class="form-group">
+          <label>Author Name</label>
+          <select class="form-control" id="postAuthor">
+            <option>M. Ali Hassan</option>
+            <option>Abdullah Zeeshan</option>
+            <option>M. Zain Ul Abideen</option>
+            <option>Rubab Ikram</option>
+            <option>Manahal Ijaz</option>
+          </select>
+        </div>
+      </div>
+      <div class="form-row">
+        <div class="form-group">
+          <label>Category</label>
+          <select class="form-control" id="postCategory">
+            <option>Tips</option><option>Operations</option><option>Savings</option>
+            <option>News</option><option>Guides</option><option>Updates</option>
+          </select>
+        </div>
+        <div class="form-group">
+          <label>Post Emoji (icon)</label>
+          <input class="form-control" id="postEmoji" placeholder="e.g. 👔 🧺 💡" value="📝">
+        </div>
+      </div>
+      <div class="form-group">
+        <label>Short Excerpt (shown on blog grid)</label>
+        <input class="form-control" id="postExcerpt" placeholder="1-2 sentence summary shown on the blog listing page...">
+      </div>
+      <div class="form-group">
+        <label>Full Content * <span style="color:var(--muted);font-size:.75rem;font-weight:400;">— You can use basic HTML tags like &lt;h2&gt;, &lt;p&gt;, &lt;ul&gt;&lt;li&gt; for formatting</span></label>
+        <textarea class="form-control" id="postContent2" style="min-height:280px;font-family:monospace;font-size:.85rem;" placeholder="Write your blog post content here...&#10;&#10;You can use HTML:&#10;&lt;h2&gt;Section Title&lt;/h2&gt;&#10;&lt;p&gt;Your paragraph text here.&lt;/p&gt;&#10;&lt;ul&gt;&lt;li&gt;List item&lt;/li&gt;&lt;/ul&gt;"></textarea>
+      </div>
+      <div style="display:flex;gap:.8rem;">
+        <button class="btn btn-green" onclick="savePost()">💾 Save Post</button>
+        <button class="btn btn-outline" onclick="clearPostForm()">✕ Clear</button>
+        <button class="btn btn-ghost" onclick="previewPost()">👁 Preview</button>
+      </div>
+    </div>
+
+    <!-- POSTS LIST -->
+    <div class="admin-section">
+      <h2>All Blog Posts</h2>
+      <table class="admin-table">
+        <thead>
+          <tr><th>Title</th><th>Category</th><th>Author</th><th>Date</th><th>Actions</th></tr>
+        </thead>
+        <tbody id="adminPostsList">
+          <tr><td colspan="5" style="text-align:center;color:var(--muted);">Loading posts...</td></tr>
+        </tbody>
+      </table>
+    </div>
+
+    <!-- TIPS -->
+    <div class="admin-section">
+      <h2>💡 Blog Writing Tips</h2>
+      <div style="display:grid;grid-template-columns:repeat(2,1fr);gap:1rem;">
+        <div style="background:var(--dark2);border-radius:10px;padding:1.2rem;">
+          <strong style="color:#fff;font-size:.88rem;">Use &lt;h2&gt; for section headers</strong>
+          <p style="color:var(--muted);font-size:.78rem;margin-top:.3rem;">&lt;h2&gt;Section Title&lt;/h2&gt;</p>
+        </div>
+        <div style="background:var(--dark2);border-radius:10px;padding:1.2rem;">
+          <strong style="color:#fff;font-size:.88rem;">Use &lt;p&gt; for paragraphs</strong>
+          <p style="color:var(--muted);font-size:.78rem;margin-top:.3rem;">&lt;p&gt;Your text here.&lt;/p&gt;</p>
+        </div>
+        <div style="background:var(--dark2);border-radius:10px;padding:1.2rem;">
+          <strong style="color:#fff;font-size:.88rem;">Use &lt;ul&gt;&lt;li&gt; for bullet lists</strong>
+          <p style="color:var(--muted);font-size:.78rem;margin-top:.3rem;">&lt;ul&gt;&lt;li&gt;Item&lt;/li&gt;&lt;/ul&gt;</p>
+        </div>
+        <div style="background:var(--dark2);border-radius:10px;padding:1.2rem;">
+          <strong style="color:#fff;font-size:.88rem;">Aim for 300–800 words</strong>
+          <p style="color:var(--muted);font-size:.78rem;margin-top:.3rem;">Good length for a helpful blog post</p>
+        </div>
+      </div>
+    </div>
+  </main>
+</div>
+
+<script src="../js/main.js"></script>
+<script src="../js/blog.js"></script>
+<script>
+function previewPost() {
+  const title = document.getElementById('postTitle')?.value.trim();
+  const content = document.getElementById('postContent2')?.value.trim();
+  if (!title || !content) { alert('Please fill in title and content first.'); return; }
+  const win = window.open('', '_blank');
+  win.document.write(`<!DOCTYPE html><html><head><meta charset="UTF-8"><title>${title}</title>
+    <link href="https://fonts.googleapis.com/css2?family=Outfit:wght@300;400;500;600;700;800;900&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="../css/style.css">
+    </head><body style="background:#0a0f0b;color:#e8f0ea;font-family:var(--font);padding:3rem 5%;max-width:760px;margin:0 auto;">
+    <a href="javascript:window.close()" style="color:var(--green-light);font-size:.85rem;">← Close Preview</a>
+    <h1 style="font-family:var(--font);font-size:2rem;margin:1.5rem 0;color:#fff;">${title}</h1>
+    <div style="line-height:1.8;color:#7a9e82;">${content}</div>
+    </body></html>`);
+}
+</script>
+</body>
+</html>

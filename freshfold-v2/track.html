@@ -1,0 +1,96 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8"/><meta name="viewport" content="width=device-width,initial-scale=1.0"/>
+  <title>Track Your Order – FreshFold</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link href="https://fonts.googleapis.com/css2?family=Outfit:wght@300;400;500;600;700;800;900&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="css/style.css">
+</head>
+<body>
+<nav class="navbar">
+  <div class="nav-logo">Fresh<span>Fold</span></div>
+  <ul class="nav-links">
+    <li><a href="index.html">Home</a></li><li><a href="services.html">Services</a></li>
+    <li><a href="how-it-works.html">How It Works</a></li><li><a href="track.html" class="active">Track Order</a></li>
+    <li><a href="blog.html">Blog</a></li><li><a href="about.html">About</a></li><li><a href="contact.html">Contact</a></li>
+  </ul>
+  <div class="nav-right"><a href="order.html" class="btn btn-green">Order Now</a></div>
+  <div class="hamburger" onclick="toggleMenu()">&#9776;</div>
+</nav>
+<div class="mobile-menu" id="mobileMenu">
+  <a href="index.html">Home</a><a href="services.html">Services</a><a href="how-it-works.html">How It Works</a>
+  <a href="track.html">Track Order</a><a href="blog.html">Blog</a><a href="about.html">About</a>
+  <a href="contact.html">Contact</a><a href="order.html" class="btn btn-green">Order Now</a>
+</div>
+
+<section class="page-hero">
+  <h1>Track Your Order</h1>
+  <p>Enter your Order ID to see real-time status of your laundry from pickup to delivery.</p>
+</section>
+
+<section class="tracker-section">
+  <div class="tracker-box">
+    <div class="tracker-input-row">
+      <input class="tracker-input" id="trackId" placeholder="Enter Order ID (e.g. FF-1001)" onkeydown="if(event.key==='Enter')trackOrder()">
+      <button class="btn btn-green" onclick="trackOrder()">🔍 Track</button>
+    </div>
+    <div id="trackerResult" class="tracker-result"></div>
+    <p style="color:var(--muted);font-size:.78rem;text-align:center;margin-top:1rem;">
+      Demo IDs to try: <strong style="color:var(--green-light)">FF-1001</strong> · <strong style="color:var(--green-light)">FF-1002</strong> · <strong style="color:var(--green-light)">FF-1003</strong>
+    </p>
+  </div>
+</section>
+
+<!-- HOW TRACKING WORKS -->
+<section style="padding:4rem 5%;max-width:800px;margin:0 auto;">
+  <div class="sec-head" style="text-align:left;">
+    <span class="tag">How It Works</span>
+    <h2>Understanding Your Order Status</h2>
+  </div>
+  <div style="display:flex;flex-direction:column;gap:1rem;">
+    <div class="card" style="padding:1.2rem 1.5rem;display:flex;align-items:center;gap:1.2rem;">
+      <div style="width:36px;height:36px;border-radius:50%;background:var(--green-faint);border:1px solid var(--border);display:flex;align-items:center;justify-content:center;font-size:.9rem;flex-shrink:0;">1</div>
+      <div><strong style="color:#fff;font-size:.9rem;">Order Placed</strong><br><span style="color:var(--muted);font-size:.8rem;">Your order has been received and confirmed via WhatsApp.</span></div>
+    </div>
+    <div class="card" style="padding:1.2rem 1.5rem;display:flex;align-items:center;gap:1.2rem;">
+      <div style="width:36px;height:36px;border-radius:50%;background:var(--green-faint);border:1px solid var(--border);display:flex;align-items:center;justify-content:center;font-size:.9rem;flex-shrink:0;">2</div>
+      <div><strong style="color:#fff;font-size:.9rem;">Pickup Scheduled</strong><br><span style="color:var(--muted);font-size:.8rem;">A rider has been assigned and is heading to your location.</span></div>
+    </div>
+    <div class="card" style="padding:1.2rem 1.5rem;display:flex;align-items:center;gap:1.2rem;">
+      <div style="width:36px;height:36px;border-radius:50%;background:var(--green-faint);border:1px solid var(--border);display:flex;align-items:center;justify-content:center;font-size:.9rem;flex-shrink:0;">3</div>
+      <div><strong style="color:#fff;font-size:.9rem;">Picked Up</strong><br><span style="color:var(--muted);font-size:.8rem;">Your clothes have been collected and are in transit to our facility.</span></div>
+    </div>
+    <div class="card" style="padding:1.2rem 1.5rem;display:flex;align-items:center;gap:1.2rem;">
+      <div style="width:36px;height:36px;border-radius:50%;background:rgba(245,197,66,.1);border:1px solid rgba(245,197,66,.2);display:flex;align-items:center;justify-content:center;font-size:.9rem;flex-shrink:0;color:var(--gold);">4</div>
+      <div><strong style="color:#fff;font-size:.9rem;">Being Processed</strong><br><span style="color:var(--muted);font-size:.8rem;">Clothes are being washed and/or ironed with professional care.</span></div>
+    </div>
+    <div class="card" style="padding:1.2rem 1.5rem;display:flex;align-items:center;gap:1.2rem;">
+      <div style="width:36px;height:36px;border-radius:50%;background:var(--green-faint);border:1px solid var(--border);display:flex;align-items:center;justify-content:center;font-size:.9rem;flex-shrink:0;">5</div>
+      <div><strong style="color:#fff;font-size:.9rem;">Out for Delivery</strong><br><span style="color:var(--muted);font-size:.8rem;">Your freshly processed clothes are packed and en route to you.</span></div>
+    </div>
+    <div class="card" style="padding:1.2rem 1.5rem;display:flex;align-items:center;gap:1.2rem;border-color:var(--green);">
+      <div style="width:36px;height:36px;border-radius:50%;background:var(--green);display:flex;align-items:center;justify-content:center;font-size:.9rem;flex-shrink:0;color:#fff;">✓</div>
+      <div><strong style="color:var(--green-light);font-size:.9rem;">Delivered</strong><br><span style="color:var(--muted);font-size:.8rem;">Order complete! Your clothes are back at your doorstep.</span></div>
+    </div>
+  </div>
+</section>
+
+<section class="cta-section">
+  <h2>Don't Have an Order Yet?</h2>
+  <p>Place your first order in under 2 minutes.</p>
+  <a href="order.html" class="btn btn-green btn-lg">Order Now →</a>
+</section>
+
+<footer class="footer">
+  <div class="footer-top">
+    <div class="footer-brand"><div class="nav-logo">Fresh<span>Fold</span></div><p>Professional laundry & ironing pickup across Rawalpindi and Islamabad.</p></div>
+    <div class="footer-col"><h4>Pages</h4><a href="index.html">Home</a><a href="services.html">Services</a><a href="track.html">Track Order</a><a href="contact.html">Contact</a></div>
+    <div class="footer-col"><h4>Contact</h4><p>📱 0333-3333333</p><p>📍 Rawalpindi / Islamabad</p></div>
+  </div>
+  <div class="footer-bottom"><p>© 2025 FreshFold. All rights reserved.</p></div>
+</footer>
+<a class="wa-float" href="https://wa.me/923333333333" target="_blank"><div class="wa-pulse"></div>💬</a>
+<script src="js/main.js"></script>
+</body>
+</html>

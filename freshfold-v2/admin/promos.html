@@ -1,0 +1,49 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8"/><meta name="viewport" content="width=device-width,initial-scale=1.0"/>
+  <title>Promo Codes – FreshFold Admin</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link href="https://fonts.googleapis.com/css2?family=Outfit:wght@300;400;500;600;700;800;900&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="../css/style.css">
+</head>
+<body>
+<div class="admin-layout">
+  <aside class="admin-sidebar">
+    <div class="admin-logo">Fresh<span>Fold</span> <span style="font-size:.65rem;color:var(--muted);font-weight:400;">Admin</span></div>
+    <nav class="admin-nav">
+      <a href="index.html">📊 Dashboard</a><a href="orders.html">📦 Orders</a>
+      <a href="blog-admin.html">✍️ Blog</a><a href="promos.html" class="active">🎟️ Promo Codes</a>
+      <a href="reviews-admin.html">⭐ Reviews</a><a href="../index.html" target="_blank">🌐 View Website</a>
+    </nav>
+  </aside>
+  <main class="admin-main">
+    <div class="admin-header"><h1>Promo Codes</h1></div>
+    <div class="admin-section">
+      <h2>Active Promo Codes</h2>
+      <table class="admin-table">
+        <thead><tr><th>Code</th><th>Discount</th><th>Description</th><th>Status</th></tr></thead>
+        <tbody>
+          <tr><td><strong style="color:var(--green-light);font-family:monospace;">FRESH20</strong></td><td>20%</td><td>General 20% discount</td><td><span class="status-badge sb-done">Active</span></td></tr>
+          <tr><td><strong style="color:var(--green-light);font-family:monospace;">STUDENT10</strong></td><td>10%</td><td>Student discount</td><td><span class="status-badge sb-done">Active</span></td></tr>
+          <tr><td><strong style="color:var(--green-light);font-family:monospace;">FIRST50</strong></td><td>Rs. 50</td><td>First order flat discount</td><td><span class="status-badge sb-done">Active</span></td></tr>
+          <tr><td><strong style="color:var(--green-light);font-family:monospace;">BULK15</strong></td><td>15%</td><td>Bulk order discount</td><td><span class="status-badge sb-done">Active</span></td></tr>
+        </tbody>
+      </table>
+      <p style="color:var(--muted);font-size:.8rem;margin-top:1rem;">💡 To add or modify promo codes, edit the <code style="background:var(--dark2);padding:.1rem .4rem;border-radius:4px;color:var(--green-light);">PROMO_CODES</code> object in <code style="background:var(--dark2);padding:.1rem .4rem;border-radius:4px;color:var(--green-light);">js/main.js</code></p>
+    </div>
+    <div class="admin-section">
+      <h2>How Promo Codes Work</h2>
+      <div style="color:var(--muted);font-size:.88rem;line-height:1.8;">
+        <p>Customers enter their promo code on the Order page or Home page. The discount is automatically calculated and applied to their order total before they confirm via WhatsApp.</p>
+        <br>
+        <p><strong style="color:#fff;">To add a new code:</strong> Open <code style="background:var(--dark2);padding:.1rem .4rem;border-radius:4px;color:var(--green-light);">js/main.js</code> and find the <code>PROMO_CODES</code> object. Add a new entry:</p>
+        <pre style="background:var(--dark2);border:1px solid var(--border);border-radius:8px;padding:1rem;margin-top:.8rem;overflow-x:auto;font-size:.8rem;">'NEWCODE': { discount: 25, label: '25% off your order!' }</pre>
+        <p style="margin-top:.8rem;">If <code>discount</code> is ≤ 100, it's treated as a percentage. If > 100, it's treated as a flat Rs. amount.</p>
+      </div>
+    </div>
+  </main>
+</div>
+<script src="../js/main.js"></script>
+</body>
+</html>

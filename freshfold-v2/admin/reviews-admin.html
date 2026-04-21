@@ -1,0 +1,61 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8"/><meta name="viewport" content="width=device-width,initial-scale=1.0"/>
+  <title>Reviews Admin – FreshFold</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link href="https://fonts.googleapis.com/css2?family=Outfit:wght@300;400;500;600;700;800;900&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="../css/style.css">
+</head>
+<body>
+<div class="admin-layout">
+  <aside class="admin-sidebar">
+    <div class="admin-logo">Fresh<span>Fold</span> <span style="font-size:.65rem;color:var(--muted);font-weight:400;">Admin</span></div>
+    <nav class="admin-nav">
+      <a href="index.html">📊 Dashboard</a><a href="orders.html">📦 Orders</a>
+      <a href="blog-admin.html">✍️ Blog</a><a href="promos.html">🎟️ Promo Codes</a>
+      <a href="reviews-admin.html" class="active">⭐ Reviews</a><a href="../index.html" target="_blank">🌐 View Website</a>
+    </nav>
+  </aside>
+  <main class="admin-main">
+    <div class="admin-header"><h1>Customer Reviews</h1></div>
+    <div class="admin-stats" style="grid-template-columns:repeat(3,1fr);">
+      <div class="a-stat"><div class="a-s-val">120+</div><div class="a-s-label">Total Reviews</div></div>
+      <div class="a-stat"><div class="a-s-val" style="color:var(--gold);">4.9★</div><div class="a-s-label">Average Rating</div></div>
+      <div class="a-stat"><div class="a-s-val">85%</div><div class="a-s-label">5-Star Reviews</div></div>
+    </div>
+    <div class="admin-section">
+      <h2>Customer-Submitted Reviews</h2>
+      <div id="adminReviewsList">
+        <p style="color:var(--muted);font-size:.88rem;">No customer-submitted reviews yet. Reviews submitted on the website will appear here.</p>
+      </div>
+    </div>
+  </main>
+</div>
+<script src="../js/main.js"></script>
+<script>
+document.addEventListener('DOMContentLoaded', () => {
+  const reviews = JSON.parse(localStorage.getItem('ff_reviews') || '[]');
+  const container = document.getElementById('adminReviewsList');
+  if (reviews.length === 0) return;
+  container.innerHTML = `<table class="admin-table">
+    <thead><tr><th>Name</th><th>Rating</th><th>Review</th><th>Date</th><th>Action</th></tr></thead>
+    <tbody>${reviews.map((r, i) => `<tr>
+      <td><strong style="color:#fff">${r.name}</strong></td>
+      <td style="color:var(--gold)">${'★'.repeat(r.stars)}${'☆'.repeat(5-r.stars)}</td>
+      <td style="max-width:300px;color:var(--muted)">${r.text.substring(0,100)}...</td>
+      <td style="color:var(--muted)">${r.date}</td>
+      <td><button onclick="deleteReview(${i})" style="background:rgba(239,68,68,.1);color:#f87171;border:1px solid rgba(239,68,68,.2);border-radius:6px;padding:.3rem .7rem;cursor:pointer;font-size:.75rem;">Delete</button></td>
+    </tr>`).join('')}</tbody>
+  </table>`;
+});
+function deleteReview(i) {
+  if (!confirm('Delete this review?')) return;
+  const reviews = JSON.parse(localStorage.getItem('ff_reviews') || '[]');
+  reviews.splice(i, 1);
+  localStorage.setItem('ff_reviews', JSON.stringify(reviews));
+  location.reload();
+}
+</script>
+</body>
+</html>
