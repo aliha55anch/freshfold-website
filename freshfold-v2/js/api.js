@@ -11,16 +11,39 @@ const API_BASE = window.location.hostname === 'localhost'
   : '';   // Empty string = same domain (works on PythonAnywhere)
 
 
-// ── Generic fetch helper ──
+// ── Generic fetch helper with retry/backoff ──
 async function apiFetch(endpoint, options = {}) {
-  const res = await fetch(API_BASE + endpoint, {
-    headers: { 'Content-Type': 'application/json' },
-    credentials: 'include',   // Send session cookie for admin auth
-    ...options,
-  });
-  const data = await res.json();
-  if (!res.ok) throw new Error(data.error || 'Request failed');
-  return data;
+  const maxRetries = options.retries ?? 2;
+  let attempt = 0;
+  const url = API_BASE + endpoint;
+  while (true) {
+    try {
+      const res = await fetch(url, {
+        headers: { 'Content-Type': 'application/json' },
+        credentials: 'include',
+        ...options,
+      });
+      const text = await res.text();
+      let data = null;
+      try { data = text ? JSON.parse(text) : null; } catch { data = text; }
+      if (!res.ok) {
+        if (res.status >= 500 && attempt < maxRetries) {
+          attempt++;
+          await new Promise(r => setTimeout(r, 300 * Math.pow(2, attempt)));
+          continue;
+        }
+        throw new Error((data && data.error) || res.statusText || 'Request failed');
+      }
+      return data;
+    } catch (err) {
+      if (attempt < maxRetries) {
+        attempt++;
+        await new Promise(r => setTimeout(r, 300 * Math.pow(2, attempt)));
+        continue;
+      }
+      throw err;
+    }
+  }
 }
 
 
@@ -57,7 +80,7 @@ async function submitOrderToAPI() {
   }
 
   const btn = document.querySelector('.submit-btn');
-  if (btn) { btn.textContent = '⏳ Placing order...'; btn.disabled = true; }
+  if (btn) { btn.textContent = 'Placing order...'; btn.disabled = true; }
 
   try {
     const result = await apiFetch('/api/orders', {
@@ -76,7 +99,7 @@ async function submitOrderToAPI() {
     // Show success
     const msg = document.getElementById('orderSuccess');
     if (msg) {
-      msg.textContent = `✅ Order ${result.order_id} placed! Total: Rs. ${result.total.toFixed(0)}. We'll confirm via WhatsApp shortly.`;
+      msg.textContent = `Order ${result.order_id} placed! Total: Rs. ${result.total.toFixed(0)}. We'll confirm via WhatsApp shortly.`;
       msg.style.display = 'block';
     }
 
@@ -89,7 +112,7 @@ async function submitOrderToAPI() {
   } catch (err) {
     showAlert('Failed to place order: ' + err.message, 'error');
   } finally {
-    if (btn) { btn.textContent = '💬 Confirm Order via WhatsApp 📱'; btn.disabled = false; }
+    if (btn) { btn.textContent = 'Confirm via WhatsApp'; btn.disabled = false; }
   }
 }
 
@@ -119,7 +142,7 @@ async function trackOrderAPI() {
   const result = document.getElementById('trackerResult');
   if (!id || !result) return;
 
-  result.innerHTML = '<p style="text-align:center;color:var(--muted);padding:1rem;">🔍 Searching...</p>';
+  result.innerHTML = '<p style="text-align:center;color:var(--muted);padding:1rem;">Searching...</p>';
   result.classList.add('show');
 
   try {
@@ -151,7 +174,7 @@ async function trackOrderAPI() {
       </div>
       <div class="track-steps">${stepsHTML}</div>`;
   } catch (err) {
-    result.innerHTML = `<p style="color:#f87171;text-align:center;padding:1rem;">❌ ${err.message}. Try: FF-1001</p>`;
+    result.innerHTML = `<p style="color:#f87171;text-align:center;padding:1rem;">Error: ${err.message}. Try: FF-1001</p>`;
   }
 }
 
@@ -172,7 +195,7 @@ async function loadBlogFromAPI() {
     }
     container.innerHTML = posts.map(p => `
       <div class="blog-card anim" onclick="window.location='blog-post.html?id=${p.post_id}'">
-        <div class="blog-thumb">${p.emoji}</div>
+        <div class="blog-thumb">${p.title ? p.title.charAt(0) : ''}</div>
         <div class="blog-body">
           <div class="blog-meta">
             <span class="blog-cat">${p.category}</span>
@@ -181,7 +204,7 @@ async function loadBlogFromAPI() {
           <h3 class="blog-title">${p.title}</h3>
           <p class="blog-excerpt">${p.excerpt}</p>
           <div style="margin-top:1rem;display:flex;align-items:center;gap:.6rem;">
-            <div style="width:28px;height:28px;border-radius:50%;background:var(--green-faint);border:1px solid var(--border);display:flex;align-items:center;justify-content:center;font-size:.75rem;">👤</div>
+            <div style="width:28px;height:28px;border-radius:50%;background:var(--green-faint);border:1px solid var(--border);display:flex;align-items:center;justify-content:center;font-size:.75rem;">${p.author ? p.author.charAt(0) : 'F'}</div>
             <span style="color:var(--muted);font-size:.78rem;">${p.author}</span>
           </div>
         </div>
@@ -208,7 +231,7 @@ async function loadBlogPostFromAPI() {
     document.title = post.title + ' — FreshFold Blog';
     container.innerHTML = `
       <div class="blog-post-header">
-        <div style="font-size:4rem;margin-bottom:1rem;">${post.emoji}</div>
+        <div style="font-size:4rem;margin-bottom:1rem;">${post.title ? post.title.charAt(0) : ''}</div>
         <div class="blog-post-meta">
           <span class="badge badge-green">${post.category}</span>
           <span style="color:var(--muted);font-size:.8rem;">${post.date}</span>
@@ -216,7 +239,7 @@ async function loadBlogPostFromAPI() {
         </div>
         <h1>${post.title}</h1>
         <div style="display:flex;align-items:center;gap:.8rem;margin-top:1rem;">
-          <div style="width:36px;height:36px;border-radius:50%;background:var(--green-faint);border:1px solid var(--border);display:flex;align-items:center;justify-content:center;">👤</div>
+          <div style="width:36px;height:36px;border-radius:50%;background:var(--green-faint);border:1px solid var(--border);display:flex;align-items:center;justify-content:center;">${post.author ? post.author.charAt(0) : 'F'}</div>
           <div><strong style="color:#fff;font-size:.88rem;">${post.author}</strong><br><span style="color:var(--muted);font-size:.75rem;">FreshFold Team</span></div>
         </div>
       </div>
@@ -245,7 +268,7 @@ async function loadReviewsFromAPI() {
         <div class="rc-stars">${'★'.repeat(r.stars)}${'☆'.repeat(5 - r.stars)}</div>
         <p class="rc-text">"${r.text}"</p>
         <div class="rc-author">
-          <div class="rc-avatar">👤</div>
+          <div class="rc-avatar">${r.name ? r.name.charAt(0) : 'U'}</div>
           <div class="rc-name"><strong>${r.name}</strong><span>${r.date}</span></div>
         </div>
       </div>`).join('');
@@ -274,7 +297,7 @@ async function submitReviewToAPI() {
       method: 'POST',
       body: JSON.stringify({ name, text, stars }),
     });
-    showAlert('✅ Thanks! Your review is pending approval.', 'success');
+    showAlert('Thanks! Your review is pending approval.', 'success');
     document.getElementById('reviewName').value = '';
     document.getElementById('reviewText').value = '';
     document.querySelectorAll('.star-select span').forEach(s => {
@@ -307,12 +330,12 @@ async function applyPromoFromAPI() {
       method: 'POST',
       body: JSON.stringify({ code }),
     });
-    result.textContent = '✅ ' + data.message;
+    result.textContent = data.message;
     result.className   = 'promo-result success';
     localStorage.setItem('appliedPromo', JSON.stringify(data));
     if (typeof updateSummary === 'function') updateSummary();
   } catch (err) {
-    result.textContent = '❌ ' + err.message;
+    result.textContent = 'Error: ' + err.message;
     result.className   = 'promo-result error';
     localStorage.removeItem('appliedPromo');
   }

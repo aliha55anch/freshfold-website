@@ -1,0 +1,473 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>My Profile — FreshFold</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link href="https://fonts.googleapis.com/css2?family=Outfit:wght@300;400;500;600;700;800;900&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="css/style.css">
+  <style>
+    .profile-section {
+      padding: var(--section-pad);
+      max-width: 900px;
+      margin: 0 auto;
+    }
+
+    .profile-header {
+      margin-bottom: 3rem;
+      text-align: center;
+    }
+
+    .profile-header h1 {
+      font-size: 2.5rem;
+      margin-bottom: 0.5rem;
+    }
+
+    .profile-header p {
+      color: var(--muted);
+      font-size: 1rem;
+    }
+
+    .profile-container {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 2rem;
+      margin-bottom: 2rem;
+    }
+
+    .profile-card {
+      background: var(--card);
+      border: 1px solid var(--border);
+      border-radius: var(--radius-lg);
+      padding: 2rem;
+    }
+
+    .card-title {
+      font-size: 1.25rem;
+      font-weight: 700;
+      margin-bottom: 1.5rem;
+      color: var(--white);
+    }
+
+    .form-group {
+      margin-bottom: 1.5rem;
+    }
+
+    .form-group label {
+      display: block;
+      font-size: 0.9rem;
+      font-weight: 600;
+      margin-bottom: 0.6rem;
+      color: var(--text);
+    }
+
+    .form-group input,
+    .form-group textarea {
+      width: 100%;
+      padding: 0.85rem 1rem;
+      background: rgba(255, 255, 255, 0.05);
+      border: 1px solid var(--border2);
+      border-radius: var(--radius);
+      color: var(--text);
+      font-family: var(--font);
+      font-size: 0.95rem;
+      transition: var(--transition);
+    }
+
+    .form-group textarea {
+      resize: vertical;
+      min-height: 100px;
+    }
+
+    .form-group input:focus,
+    .form-group textarea:focus {
+      outline: none;
+      background: rgba(255, 255, 255, 0.08);
+      border-color: var(--green);
+      box-shadow: 0 0 16px rgba(22, 163, 74, 0.15);
+    }
+
+    .form-group input:disabled {
+      opacity: 0.6;
+      cursor: not-allowed;
+    }
+
+    .btn-group {
+      display: flex;
+      gap: 1rem;
+      margin-top: 2rem;
+    }
+
+    .btn-primary {
+      flex: 1;
+      padding: 1rem;
+      background: linear-gradient(135deg, var(--green), var(--green-light));
+      border: none;
+      border-radius: var(--radius);
+      color: white;
+      font-weight: 700;
+      font-size: 1rem;
+      font-family: var(--font);
+      cursor: pointer;
+      transition: var(--transition);
+    }
+
+    .btn-primary:hover {
+      transform: var(--lift-sm);
+      box-shadow: var(--shadow-green);
+    }
+
+    .btn-primary:disabled {
+      opacity: 0.5;
+      cursor: not-allowed;
+      transform: none;
+    }
+
+    .btn-secondary {
+      flex: 1;
+      padding: 1rem;
+      background: rgba(255, 255, 255, 0.1);
+      border: 1px solid var(--border);
+      border-radius: var(--radius);
+      color: var(--text);
+      font-weight: 700;
+      font-size: 1rem;
+      font-family: var(--font);
+      cursor: pointer;
+      transition: var(--transition);
+    }
+
+    .btn-secondary:hover {
+      background: rgba(255, 255, 255, 0.15);
+      border-color: var(--green);
+    }
+
+    .alert {
+      padding: 1rem 1.5rem;
+      border-radius: var(--radius);
+      margin-bottom: 1.5rem;
+      font-size: 0.95rem;
+      display: none;
+    }
+
+    .alert.error {
+      background: rgba(239, 68, 68, 0.1);
+      border: 1px solid rgba(239, 68, 68, 0.3);
+      color: #fca5a5;
+    }
+
+    .alert.success {
+      background: rgba(34, 197, 94, 0.1);
+      border: 1px solid rgba(34, 197, 94, 0.3);
+      color: #86efac;
+    }
+
+    .separator {
+      border: none;
+      border-top: 1px solid var(--border);
+      margin: 2rem 0;
+    }
+
+    .password-section {
+      margin-top: 2rem;
+      padding-top: 2rem;
+      border-top: 1px solid var(--border);
+    }
+
+    .password-section h3 {
+      font-size: 1.1rem;
+      margin-bottom: 1rem;
+      color: var(--white);
+    }
+
+    .back-link {
+      display: inline-block;
+      margin-bottom: 2rem;
+      color: var(--green);
+      text-decoration: none;
+      font-size: 0.9rem;
+      font-weight: 600;
+    }
+
+    .back-link:hover {
+      text-decoration: underline;
+    }
+
+    .user-avatar {
+      width: 80px;
+      height: 80px;
+      border-radius: 50%;
+      background: linear-gradient(135deg, var(--green), var(--green-light));
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-size: 2rem;
+      margin: 0 auto 1rem;
+    }
+
+    .user-email {
+      text-align: center;
+      color: var(--muted);
+      font-size: 0.9rem;
+    }
+
+    @media (max-width: 768px) {
+      .profile-container {
+        grid-template-columns: 1fr;
+      }
+
+      .profile-header h1 {
+        font-size: 1.8rem;
+      }
+
+      .btn-group {
+        flex-direction: column;
+      }
+    }
+  </style>
+</head>
+<body>
+  <!-- NAVBAR -->
+  <nav class="navbar">
+    <div class="nav-logo">Fresh<span>Fold</span></div>
+    <ul class="nav-links">
+      <li><a href="index.html">Home</a></li>
+      <li><a href="services.html">Services</a></li>
+      <li><a href="how-it-works.html">How It Works</a></li>
+      <li><a href="track.html">Track Order</a></li>
+      <li><a href="blog.html">Blog</a></li>
+      <li><a href="about.html">About</a></li>
+      <li><a href="contact.html">Contact</a></li>
+    </ul>
+    <div class="nav-right">
+      <div id="authBtnContainer"></div>
+      <a href="order.html" class="btn btn-green">Order Now</a>
+    </div>
+    <div class="hamburger" onclick="toggleMenu()">&#9776;</div>
+  </nav>
+  <div class="mobile-menu" id="mobileMenu">
+    <a href="index.html">Home</a><a href="services.html">Services</a>
+    <a href="how-it-works.html">How It Works</a><a href="track.html">Track Order</a>
+    <a href="blog.html">Blog</a><a href="about.html">About</a><a href="contact.html">Contact</a>
+    <a href="order.html" class="btn btn-green">Order Now</a>
+  </div>
+
+  <section class="profile-section">
+    <a href="index.html" class="back-link">← Back to Home</a>
+
+    <div class="profile-header">
+      <h1>My Profile</h1>
+      <p>Manage your account information</p>
+    </div>
+
+    <div class="profile-container">
+      <!-- Left Card: Personal Info -->
+      <div class="profile-card">
+        <div class="card-title">Personal Information</div>
+        
+        <div id="infoAlert" class="alert"></div>
+
+        <form id="profileForm" onsubmit="handleProfileUpdate(event)">
+          <div class="form-group">
+            <label for="name">Full Name</label>
+            <input type="text" id="name" placeholder="Your name" required />
+          </div>
+
+          <div class="form-group">
+            <label for="email">Email Address</label>
+            <input type="email" id="email" disabled style="opacity: 0.7;" />
+            <small style="color: var(--muted); font-size: 0.8rem;">Email cannot be changed</small>
+          </div>
+
+          <div class="form-group">
+            <label for="phone">Phone Number</label>
+            <input type="tel" id="phone" placeholder="03001234567" />
+          </div>
+
+          <div class="form-group">
+            <label for="address">Address</label>
+            <textarea id="address" placeholder="Your delivery address"></textarea>
+          </div>
+
+          <button type="submit" class="btn-primary" id="updateBtn">Save Changes</button>
+        </form>
+      </div>
+
+      <!-- Right Card: Password & Account -->
+      <div class="profile-card">
+        <div class="card-title">Security</div>
+
+        <div id="securityAlert" class="alert"></div>
+
+        <form id="passwordForm" onsubmit="handlePasswordChange(event)">
+          <div class="form-group">
+            <label for="currentPassword">Current Password</label>
+            <input type="password" id="currentPassword" placeholder="Enter your current password" />
+          </div>
+
+          <div class="form-group">
+            <label for="newPassword">New Password</label>
+            <input type="password" id="newPassword" placeholder="New password (min 6 chars)" />
+          </div>
+
+          <div class="form-group">
+            <label for="confirmPassword">Confirm New Password</label>
+            <input type="password" id="confirmPassword" placeholder="Confirm new password" />
+          </div>
+
+          <button type="submit" class="btn-primary" id="passwordBtn">Change Password</button>
+        </form>
+
+        <div class="password-section">
+          <h3>Account Created</h3>
+          <p id="createdDate" style="color: var(--muted); margin-bottom: 1.5rem;"></p>
+
+          <button onclick="handleLogout()" class="btn-secondary" style="width: 100%;">Logout</button>
+        </div>
+      </div>
+    </div>
+
+    <!-- Quick Links -->
+    <div style="text-align: center; margin-top: 3rem;">
+      <a href="my-orders.html" class="btn btn-green" style="margin-right: 1rem;">View My Orders</a>
+      <a href="index.html" class="btn btn-outline">← Back Home</a>
+    </div>
+  </section>
+
+  <script src="js/api.js"></script>
+  <script src="js/auth.js"></script>
+  <script>
+    // Require authentication
+    (async () => {
+      const isAuth = await requireAuth();
+      if (!isAuth) return;
+
+      const user = getCurrentUser();
+      if (!user) return;
+
+      // Populate form with user data
+      document.getElementById('name').value = user.name || '';
+      document.getElementById('email').value = user.email || '';
+      document.getElementById('phone').value = user.phone || '';
+      document.getElementById('address').value = user.address || '';
+
+      // Format created date
+      // Replace with:
+const created = new Date(user.created_at); // Already a 'YYYY-MM-DD' string
+document.getElementById('createdDate').textContent =
+  `Account created on ${created.toLocaleDateString('en-US', { year: 'numeric', month: 'long', day: 'numeric', timeZone: 'UTC' })}`;
+      document.getElementById('createdDate').textContent = 
+        `Account created on ${created.toLocaleDateString('en-US', { year: 'numeric', month: 'long', day: 'numeric' })}`;
+    })();
+
+    async function handleProfileUpdate(event) {
+      event.preventDefault();
+      const infoAlert = document.getElementById('infoAlert');
+      const updateBtn = document.getElementById('updateBtn');
+
+      infoAlert.style.display = 'none';
+
+      const name = document.getElementById('name').value.trim();
+      const phone = document.getElementById('phone').value.trim();
+      const address = document.getElementById('address').value.trim();
+
+      if (!name) {
+        showAlert('Name is required', 'error', infoAlert);
+        return;
+      }
+
+      updateBtn.disabled = true;
+      updateBtn.textContent = 'Saving...';
+
+      try {
+        const result = await apiFetch('/api/auth/profile', {
+          method: 'PUT',
+          body: JSON.stringify({ name, phone, address }),
+        });
+
+        showAlert(result.message, 'success', infoAlert);
+        
+        // Update current user in memory
+        currentUser = result.user;
+      } catch (err) {
+        showAlert('Error: ' + err.message, 'error', infoAlert);
+      } finally {
+        updateBtn.disabled = false;
+        updateBtn.textContent = '💾 Save Changes';
+      }
+    }
+
+    async function handlePasswordChange(event) {
+      event.preventDefault();
+      const securityAlert = document.getElementById('securityAlert');
+      const passwordBtn = document.getElementById('passwordBtn');
+
+      securityAlert.style.display = 'none';
+
+      const current = document.getElementById('currentPassword').value;
+      const newPass = document.getElementById('newPassword').value;
+      const confirm = document.getElementById('confirmPassword').value;
+
+      if (!current || !newPass || !confirm) {
+        showAlert('All fields are required', 'error', securityAlert);
+        return;
+      }
+
+      if (newPass.length < 6) {
+        showAlert('New password must be at least 6 characters', 'error', securityAlert);
+        return;
+      }
+
+      if (newPass !== confirm) {
+        showAlert('Passwords do not match', 'error', securityAlert);
+        return;
+      }
+
+      passwordBtn.disabled = true;
+      passwordBtn.textContent = 'Changing...';
+
+      try {
+        const result = await apiFetch('/api/auth/profile', {
+          method: 'PUT',
+          body: JSON.stringify({
+            current_password: current,
+            new_password: newPass,
+          }),
+        });
+
+        showAlert('Password changed successfully', 'success', securityAlert);
+        
+        // Clear password fields
+        document.getElementById('currentPassword').value = '';
+        document.getElementById('newPassword').value = '';
+        document.getElementById('confirmPassword').value = '';
+      } catch (err) {
+        showAlert('Error: ' + err.message, 'error', securityAlert);
+      } finally {
+        passwordBtn.disabled = false;
+        passwordBtn.textContent = '🔄 Change Password';
+      }
+    }
+
+    function showAlert(message, type, container) {
+      container.className = `alert ${type}`;
+      container.textContent = message;
+      container.style.display = 'block';
+      
+      // Auto-hide success messages after 5 seconds
+      if (type === 'success') {
+        setTimeout(() => {
+          container.style.display = 'none';
+        }, 5000);
+      }
+    }
+
+    // Mobile menu toggle
+    function toggleMenu() {
+      const menu = document.getElementById('mobileMenu');
+      menu.style.display = menu.style.display === 'block' ? 'none' : 'block';
+    }
+  </script>
+</body>
+</html>

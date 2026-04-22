@@ -1,0 +1,400 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Register — FreshFold</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link href="https://fonts.googleapis.com/css2?family=Outfit:wght@300;400;500;600;700;800;900&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="css/style.css">
+  <style>
+    .auth-page {
+      min-height: 100vh;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      padding: 2rem 1rem;
+    }
+
+    .auth-container {
+      width: 100%;
+      max-width: 420px;
+    }
+
+    .auth-card {
+      background: var(--card);
+      border: 1px solid var(--border);
+      border-radius: var(--radius-lg);
+      padding: 2.5rem;
+      backdrop-filter: blur(10px);
+    }
+
+    .auth-header {
+      text-align: center;
+      margin-bottom: 2rem;
+    }
+
+    .auth-header .logo {
+      font-size: 2rem;
+      font-weight: 900;
+      margin-bottom: 0.5rem;
+      background: linear-gradient(135deg, var(--green), var(--green-light));
+      -webkit-background-clip: text;
+      -webkit-text-fill-color: transparent;
+      background-clip: text;
+    }
+
+    .auth-header .logo span {
+      color: var(--green);
+    }
+
+    .auth-header h1 {
+      font-size: 1.5rem;
+      margin-bottom: 0.5rem;
+    }
+
+    .auth-header p {
+      color: var(--muted);
+      font-size: 0.9rem;
+    }
+
+    .form-group {
+      margin-bottom: 1.5rem;
+    }
+
+    .form-group label {
+      display: block;
+      font-size: 0.9rem;
+      font-weight: 600;
+      margin-bottom: 0.6rem;
+      color: var(--text);
+    }
+
+    .form-group input {
+      width: 100%;
+      padding: 0.85rem 1rem;
+      background: rgba(255, 255, 255, 0.05);
+      border: 1px solid var(--border2);
+      border-radius: var(--radius);
+      color: var(--text);
+      font-family: var(--font);
+      font-size: 0.95rem;
+      transition: var(--transition);
+    }
+
+    .form-group input::placeholder {
+      color: var(--muted);
+    }
+
+    .form-group input:focus {
+      outline: none;
+      background: rgba(255, 255, 255, 0.08);
+      border-color: var(--green);
+      box-shadow: 0 0 16px rgba(22, 163, 74, 0.15);
+    }
+
+    .form-group input.error {
+      border-color: #ef4444;
+      background: rgba(239, 68, 68, 0.05);
+    }
+
+    .password-strength {
+      font-size: 0.75rem;
+      margin-top: 0.4rem;
+      display: flex;
+      gap: 0.3rem;
+    }
+
+    .strength-bar {
+      flex: 1;
+      height: 3px;
+      background: rgba(255, 255, 255, 0.1);
+      border-radius: 2px;
+      overflow: hidden;
+    }
+
+    .strength-bar.weak { background: #ef4444; }
+    .strength-bar.medium { background: #f59e0b; }
+    .strength-bar.strong { background: #22c55e; }
+
+    .auth-submit {
+      width: 100%;
+      padding: 1rem;
+      background: linear-gradient(135deg, var(--green), var(--green-light));
+      border: none;
+      border-radius: var(--radius);
+      color: white;
+      font-weight: 700;
+      font-size: 1rem;
+      font-family: var(--font);
+      cursor: pointer;
+      transition: var(--transition);
+      margin-top: 1rem;
+    }
+
+    .auth-submit:hover {
+      transform: var(--lift-sm);
+      box-shadow: var(--shadow-green);
+    }
+
+    .auth-submit:disabled {
+      opacity: 0.5;
+      cursor: not-allowed;
+      transform: none;
+    }
+
+    .auth-divider {
+      text-align: center;
+      margin: 2rem 0;
+      font-size: 0.9rem;
+      color: var(--muted);
+    }
+
+    .auth-divider::before,
+    .auth-divider::after {
+      content: '';
+      display: inline-block;
+      width: 35%;
+      height: 1px;
+      background: var(--border);
+      vertical-align: middle;
+    }
+
+    .auth-divider::before {
+      margin-right: 0.5rem;
+    }
+
+    .auth-divider::after {
+      margin-left: 0.5rem;
+    }
+
+    .auth-toggle {
+      text-align: center;
+      color: var(--muted);
+      font-size: 0.9rem;
+    }
+
+    .auth-toggle a {
+      color: var(--green);
+      font-weight: 600;
+      text-decoration: none;
+    }
+
+    .auth-toggle a:hover {
+      text-decoration: underline;
+    }
+
+    .alert {
+      padding: 1rem;
+      border-radius: var(--radius);
+      margin-bottom: 1.5rem;
+      font-size: 0.9rem;
+      display: none;
+    }
+
+    .alert.error {
+      background: rgba(239, 68, 68, 0.1);
+      border: 1px solid rgba(239, 68, 68, 0.3);
+      color: #fca5a5;
+    }
+
+    .alert.success {
+      background: rgba(34, 197, 94, 0.1);
+      border: 1px solid rgba(34, 197, 94, 0.3);
+      color: #86efac;
+    }
+
+    .back-link {
+      display: inline-block;
+      margin-bottom: 2rem;
+      color: var(--green);
+      text-decoration: none;
+      font-size: 0.9rem;
+      font-weight: 600;
+    }
+
+    .back-link:hover {
+      text-decoration: underline;
+    }
+
+    @media (max-width: 480px) {
+      .auth-card {
+        padding: 1.5rem;
+      }
+
+      .auth-header h1 {
+        font-size: 1.2rem;
+      }
+
+      .auth-header .logo {
+        font-size: 1.5rem;
+      }
+    }
+  </style>
+</head>
+<body>
+  <a href="index.html" class="back-link">← Back to Home</a>
+
+  <div class="auth-page">
+    <div class="auth-container">
+      <div class="auth-card">
+        <div class="auth-header">
+          <div class="logo">Fresh<span>Fold</span></div>
+          <h1>Register</h1>
+          <p>Create your account</p>
+        </div>
+
+        <div id="alertBox" class="alert"></div>
+
+        <form id="registerForm" onsubmit="handleRegister(event)">
+          <div class="form-group">
+            <label for="name">Full Name</label>
+            <input
+              type="text"
+              id="name"
+              name="name"
+              placeholder="Your full name"
+              required
+            />
+          </div>
+
+          <div class="form-group">
+            <label for="email">Email Address</label>
+            <input
+              type="email"
+              id="email"
+              name="email"
+              placeholder="you@example.com"
+              required
+            />
+          </div>
+
+          <div class="form-group">
+            <label for="password">Password</label>
+            <input
+              type="password"
+              id="password"
+              name="password"
+              placeholder="At least 6 characters"
+              required
+              onchange="checkPasswordStrength()"
+              oninput="checkPasswordStrength()"
+            />
+            <div class="password-strength" id="strengthBars"></div>
+          </div>
+
+          <div class="form-group">
+            <label for="confirm">Confirm Password</label>
+            <input
+              type="password"
+              id="confirm"
+              name="confirm_password"
+              placeholder="Re-enter password"
+              required
+            />
+          </div>
+
+          <button type="submit" class="auth-submit" id="submitBtn">Create Account</button>
+        </form>
+
+        <div class="auth-divider">or</div>
+
+        <div class="auth-toggle">
+          Already have an account?
+          <a href="login.html">Sign in</a>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <script src="js/api.js"></script>
+  <script src="js/auth.js"></script>
+  <script>
+    function checkPasswordStrength() {
+      const password = document.getElementById('password').value;
+      const strengthBars = document.getElementById('strengthBars');
+      
+      let strength = 0;
+      if (password.length >= 6) strength++;
+      if (password.length >= 10) strength++;
+      if (/[A-Z]/.test(password) && /[0-9]/.test(password)) strength++;
+
+      strengthBars.innerHTML = '';
+      for (let i = 0; i < 3; i++) {
+        const bar = document.createElement('div');
+        bar.className = 'strength-bar';
+        if (i < strength) {
+          bar.classList.add(strength === 1 ? 'weak' : strength === 2 ? 'medium' : 'strong');
+        }
+        strengthBars.appendChild(bar);
+      }
+    }
+
+    async function handleRegister(event) {
+      event.preventDefault();
+      const alertBox = document.getElementById('alertBox');
+      const submitBtn = document.getElementById('submitBtn');
+      
+      const name = document.getElementById('name').value.trim();
+      const email = document.getElementById('email').value.trim().toLowerCase();
+      const password = document.getElementById('password').value;
+      const confirm = document.getElementById('confirm').value;
+
+      alertBox.style.display = 'none';
+
+      if (!name || !email || !password || !confirm) {
+        showAlert('Please fill in all fields', 'error');
+        return;
+      }
+
+      if (password !== confirm) {
+        showAlert('Passwords do not match', 'error');
+        return;
+      }
+
+      if (password.length < 6) {
+        showAlert('Password must be at least 6 characters', 'error');
+        return;
+      }
+
+      submitBtn.disabled = true;
+      submitBtn.textContent = 'Creating account...';
+
+      try {
+        const result = await apiFetch('/api/auth/register', {
+          method: 'POST',
+          body: JSON.stringify({ name, email, password, confirm_password: confirm }),
+        });
+
+        showAlert(result.message, 'success');
+        setTimeout(() => {
+          window.location.href = 'index.html';
+        }, 1500);
+      } catch (err) {
+        showAlert('Error: ' + err.message, 'error');
+        submitBtn.disabled = false;
+        submitBtn.textContent = 'Create Account';
+      }
+    }
+
+    function showAlert(message, type) {
+      const alertBox = document.getElementById('alertBox');
+      alertBox.className = `alert ${type}`;
+      alertBox.textContent = message;
+      alertBox.style.display = 'block';
+    }
+
+    // Check if already logged in
+    (async () => {
+      try {
+        const userCheck = await apiFetch('/api/auth/user');
+        if (userCheck.logged_in) {
+          window.location.href = 'index.html';
+        }
+      } catch (err) {
+        // Not logged in, show register form
+      }
+    })();
+  </script>
+</body>
+</html>

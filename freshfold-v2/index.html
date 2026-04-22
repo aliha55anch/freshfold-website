@@ -6,7 +6,7 @@
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link href="https://fonts.googleapis.com/css2?family=Outfit:wght@300;400;500;600;700;800;900&display=swap" rel="stylesheet">
   <link rel="stylesheet" href="css/style.css">
-  
+  <script src="js/auth.js"></script>
 </head>
 <body>
 
@@ -22,7 +22,10 @@
     <li><a href="about.html">About</a></li>
     <li><a href="contact.html">Contact</a></li>
   </ul>
-  <div class="nav-right"><a href="order.html" class="btn btn-green">Order Now</a></div>
+  <div class="nav-right">
+    <div id="authBtnContainer"></div>
+    <a href="order.html" class="btn btn-green">Order Now</a>
+  </div>
   <div class="hamburger" onclick="toggleMenu()">&#9776;</div>
 </nav>
 <div class="mobile-menu" id="mobileMenu">
@@ -61,24 +64,24 @@
   </div>
 
   <div class="hero-right">
-    <div class="hero-float">🎉 New: Express 12hr Service</div>
+    <div class="hero-float">New: Express 12hr Service</div>
     <div class="hero-main-card">
       <div class="card-hdr">
         <span class="card-lbl">Live Orders</span>
         <span class="live-pill"><span class="live-dot"></span> Live</span>
       </div>
       <div class="order-row">
-        <div class="or-ico">📦</div>
+        <div class="or-ico">Pkg</div>
         <div class="or-info"><div class="or-name">Order FF-1042 — Ali Hassan</div><div class="or-sub">3 shirts · 2 pants — ironed &amp; packed</div></div>
         <span class="or-badge b-done">Done ✓</span>
       </div>
       <div class="order-row">
-        <div class="or-ico">🚴</div>
+        <div class="or-ico">Rider</div>
         <div class="or-info"><div class="or-name">Order FF-1041 — Sara Batool</div><div class="or-sub">1 full outfit — rider en route</div></div>
         <span class="or-badge b-route">En Route</span>
       </div>
       <div class="order-row">
-        <div class="or-ico">🧹</div>
+        <div class="or-ico">Clean</div>
         <div class="or-info"><div class="or-name">Order FF-1040 — Umar Farooq</div><div class="or-sub">5 shirts — wash + iron</div></div>
         <span class="or-badge b-proc">Processing</span>
       </div>
@@ -88,8 +91,8 @@
       </div>
     </div>
     <div class="mini-row">
-      <div class="mini-card"><div class="mc-ico">⚡</div><div class="mc-val">12hr</div><div class="mc-lbl">Express option</div></div>
-      <div class="mini-card"><div class="mc-ico">💸</div><div class="mc-val">15%</div><div class="mc-lbl">Bulk discount</div></div>
+      <div class="mini-card"><div class="mc-ico">Fast</div><div class="mc-val">12hr</div><div class="mc-lbl">Express option</div></div>
+      <div class="mini-card"><div class="mc-ico">Save</div><div class="mc-val">15%</div><div class="mc-lbl">Bulk discount</div></div>
     </div>
   </div>
 </section>
@@ -125,7 +128,7 @@
   </div>
   <div class="bento-grid">
     <div class="bento-card bento-wide bento-accent anim">
-      <div class="bc-ico">🚴</div>
+      <div class="bc-ico">Rider</div>
       <div class="bc-title">Free Pickup &amp; Doorstep Delivery</div>
       <div class="bc-desc">We come to your hostel, home, or office. No transport cost, no extra charges — just send a WhatsApp and our rider handles everything.</div>
       <div class="bc-chips">
@@ -136,7 +139,7 @@
       </div>
     </div>
     <div class="bento-card anim">
-      <div class="bc-ico">⚡</div>
+      <div class="bc-ico">Fast</div>
       <div class="bc-title">12hr Express</div>
       <div class="bc-desc">Urgent meeting tomorrow? Drop off in the morning, get back the same evening.</div>
     </div>
@@ -146,7 +149,7 @@
       <div class="bc-desc">Over 120 verified reviews from real customers across Rawalpindi.</div>
     </div>
     <div class="bento-card anim">
-      <div class="bc-ico">📱</div>
+      <div class="bc-ico">Phone</div>
       <div class="bc-title">WhatsApp Ordering</div>
       <div class="bc-desc">No app, no account. Just message — confirmed in minutes.</div>
     </div>
@@ -156,7 +159,7 @@
       <div class="bc-desc">10+ items = 10% off. 20+ items = 15% off. Automatically applied.</div>
     </div>
     <div class="bento-card anim">
-      <div class="bc-ico">🔍</div>
+      <div class="bc-ico">Track</div>
       <div class="bc-title">Live Order Tracking</div>
       <div class="bc-desc">Track from pickup to delivery with your unique order ID.</div>
     </div>
@@ -170,13 +173,13 @@
     <h2>5 Steps. 24 Hours. Done.</h2>
     <p>From your door, back to your door — completely handled.</p>
   </div>
-  <div class="timeline">
-    <div class="tl-step anim"><div class="tl-num">01</div><div class="tl-emoji">📅</div><div class="tl-title">Schedule</div><div class="tl-desc">WhatsApp or order form — book your slot.</div></div>
-    <div class="tl-step anim"><div class="tl-num">02</div><div class="tl-emoji">🚴</div><div class="tl-title">Pickup</div><div class="tl-desc">Rider at your door at the agreed time.</div></div>
-    <div class="tl-step anim"><div class="tl-num">03</div><div class="tl-emoji">🧹</div><div class="tl-title">Process</div><div class="tl-desc">Washed and/or ironed professionally.</div></div>
-    <div class="tl-step anim"><div class="tl-num">04</div><div class="tl-emoji">📦</div><div class="tl-title">Pack</div><div class="tl-desc">Folded in clean branded bags.</div></div>
-    <div class="tl-step anim"><div class="tl-num">05</div><div class="tl-emoji">🏠</div><div class="tl-title">Deliver</div><div class="tl-desc">Back at your door in 24hrs.</div></div>
-  </div>
+    <div class="timeline">
+      <div class="tl-step anim"><div class="tl-num">01</div><div class="tl-emoji">Date</div><div class="tl-title">Schedule</div><div class="tl-desc">WhatsApp or order form — book your slot.</div></div>
+      <div class="tl-step anim"><div class="tl-num">02</div><div class="tl-emoji">Pickup</div><div class="tl-title">Pickup</div><div class="tl-desc">Rider at your door at the agreed time.</div></div>
+      <div class="tl-step anim"><div class="tl-num">03</div><div class="tl-emoji">Process</div><div class="tl-title">Process</div><div class="tl-desc">Washed and/or ironed professionally.</div></div>
+      <div class="tl-step anim"><div class="tl-num">04</div><div class="tl-emoji">Pack</div><div class="tl-title">Pack</div><div class="tl-desc">Folded in clean branded bags.</div></div>
+      <div class="tl-step anim"><div class="tl-num">05</div><div class="tl-emoji">Deliver</div><div class="tl-title">Deliver</div><div class="tl-desc">Back at your door in 24hrs.</div></div>
+    </div>
 </section>
 
 <!-- ══ PRICING PREVIEW ══ -->
@@ -187,9 +190,9 @@
     <p>No hidden charges. Per item, every time.</p>
   </div>
   <div class="price-preview-grid">
-    <div class="pp-card anim"><div class="pp-emoji">👔</div><div class="pp-name">Shirt</div><div class="pp-price"><sub>Rs.</sub>80</div><div class="pp-exp">⚡ Express Rs. 130</div></div>
-    <div class="pp-card pp-feat anim"><div class="pp-emoji">🎽</div><div class="pp-name">Full Outfit</div><div class="pp-price"><sub>Rs.</sub>250</div><div class="pp-exp">⚡ Express Rs. 350</div></div>
-    <div class="pp-card anim"><div class="pp-emoji">👖</div><div class="pp-name">Pants</div><div class="pp-price"><sub>Rs.</sub>110</div><div class="pp-exp">⚡ Express Rs. 160</div></div>
+    <div class="pp-card anim"><div class="pp-emoji">SH</div><div class="pp-name">Shirt</div><div class="pp-price"><sub>Rs.</sub>80</div><div class="pp-exp">Fast Express Rs. 130</div></div>
+    <div class="pp-card pp-feat anim"><div class="pp-emoji">FO</div><div class="pp-name">Full Outfit</div><div class="pp-price"><sub>Rs.</sub>250</div><div class="pp-exp">Fast Express Rs. 350</div></div>
+    <div class="pp-card anim"><div class="pp-emoji">PT</div><div class="pp-name">Pants</div><div class="pp-price"><sub>Rs.</sub>110</div><div class="pp-exp">Fast Express Rs. 160</div></div>
   </div>
   <div class="center-text"><a href="services.html" class="btn btn-outline">See Full Pricing →</a></div>
 </section>
@@ -206,19 +209,19 @@
       <div class="rv-big-quote">"</div>
       <div class="rv-stars">★★★★★</div>
       <p class="rv-text">Honestly the best service I've found in Rawalpindi. Clothes come back looking brand new every single time. As an office worker I can't afford to look unprofessional — FreshFold makes sure I never do. The express option has saved me before multiple important meetings.</p>
-      <div class="rv-author"><div class="rv-avatar">👩‍💼</div><div><div class="rv-name">Nadia Akhtar</div><div class="rv-role">HR Executive, Rawalpindi</div></div></div>
+      <div class="rv-author"><div class="rv-avatar">N</div><div><div class="rv-name">Nadia Akhtar</div><div class="rv-role">HR Executive, Rawalpindi</div></div></div>
     </div>
     <div class="rv-card anim">
       <div class="rv-big-quote">"</div>
       <div class="rv-stars">★★★★★</div>
       <p class="rv-text">Perfect for hostel life. Clothes come back perfectly ironed, on time, every single time.</p>
-      <div class="rv-author"><div class="rv-avatar">👨‍🎓</div><div><div class="rv-name">Bilal Rafiq</div><div class="rv-role">Student, COMSATS</div></div></div>
+      <div class="rv-author"><div class="rv-avatar">B</div><div><div class="rv-name">Bilal Rafiq</div><div class="rv-role">Student, COMSATS</div></div></div>
     </div>
     <div class="rv-card anim">
       <div class="rv-big-quote">"</div>
       <div class="rv-stars">★★★★☆</div>
       <p class="rv-text">Great rates and really professional packing. The promo code gave a real discount on my first order.</p>
-      <div class="rv-author"><div class="rv-avatar">👨</div><div><div class="rv-name">Hamza Tariq</div><div class="rv-role">Student, Arid University</div></div></div>
+      <div class="rv-author"><div class="rv-avatar">H</div><div><div class="rv-name">Hamza Tariq</div><div class="rv-role">Student, Arid University</div></div></div>
     </div>
   </div>
   <div id="dynamicReviews" class="reviews-bento"></div>
@@ -229,7 +232,7 @@
 <section class="promo-section">
   <div class="promo-split">
     <div>
-      <div class="promo-badge">🎟️ Discount Codes</div>
+      <div class="promo-badge">Discount Codes</div>
       <h2>Save on Every Order</h2>
       <p>Real discounts — not gimmicks. Pick a code, apply at checkout, save instantly.</p>
       <div class="code-list">
@@ -257,12 +260,12 @@
   </div>
   <div class="sp-overflow">
     <div class="sp-track">
-      <div class="sp-card"><div class="sp-logo">🏪</div><div><div class="sp-name">CleanPro Supplies</div><div class="sp-type">Equipment Sponsor</div></div></div>
-      <div class="sp-card"><div class="sp-logo">🛵</div><div><div class="sp-name">RWP Riders Co.</div><div class="sp-type">Logistics Partner</div></div></div>
-      <div class="sp-card"><div class="sp-logo">🧴</div><div><div class="sp-name">FabricCare PK</div><div class="sp-type">Product Sponsor</div></div></div>
-      <div class="sp-card"><div class="sp-logo">🏫</div><div><div class="sp-name">Arid Plaza Market</div><div class="sp-type">Distribution Partner</div></div></div>
-      <div class="sp-card"><div class="sp-logo">📦</div><div><div class="sp-name">PackRight Pakistan</div><div class="sp-type">Packaging Sponsor</div></div></div>
-      <div class="sp-card"><div class="sp-logo">💻</div><div><div class="sp-name">TechBase RWP</div><div class="sp-type">Tech Sponsor</div></div></div>
+      <div class="sp-card"><div class="sp-logo">&nbsp;</div><div><div class="sp-name">CleanPro Supplies</div><div class="sp-type">Equipment Sponsor</div></div></div>
+      <div class="sp-card"><div class="sp-logo">&nbsp;</div><div><div class="sp-name">RWP Riders Co.</div><div class="sp-type">Logistics Partner</div></div></div>
+      <div class="sp-card"><div class="sp-logo">&nbsp;</div><div><div class="sp-name">FabricCare PK</div><div class="sp-type">Product Sponsor</div></div></div>
+      <div class="sp-card"><div class="sp-logo">&nbsp;</div><div><div class="sp-name">Arid Plaza Market</div><div class="sp-type">Distribution Partner</div></div></div>
+      <div class="sp-card"><div class="sp-logo">&nbsp;</div><div><div class="sp-name">PackRight Pakistan</div><div class="sp-type">Packaging Sponsor</div></div></div>
+      <div class="sp-card"><div class="sp-logo">&nbsp;</div><div><div class="sp-name">TechBase RWP</div><div class="sp-type">Tech Sponsor</div></div></div>
       <!-- duplicate -->
       <div class="sp-card"><div class="sp-logo">🏪</div><div><div class="sp-name">CleanPro Supplies</div><div class="sp-type">Equipment Sponsor</div></div></div>
       <div class="sp-card"><div class="sp-logo">🛵</div><div><div class="sp-name">RWP Riders Co.</div><div class="sp-type">Logistics Partner</div></div></div>

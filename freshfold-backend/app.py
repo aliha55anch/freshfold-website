@@ -8,6 +8,8 @@ Deploy:       PythonAnywhere (see SETUP.md)
 from flask import Flask, request, jsonify, render_template, redirect, url_for, session, send_from_directory
 from flask_sqlalchemy import SQLAlchemy
 from flask_cors import CORS
+from flask_compress import Compress
+from werkzeug.security import generate_password_hash, check_password_hash
 from datetime import datetime, timedelta
 from functools import wraps
 import smtplib
@@ -15,12 +17,14 @@ from email.mime.text import MIMEText
 from email.mime.multipart import MIMEMultipart
 import os
 import json
+import re
 
 # ─────────────────────────────────────
 #  APP SETUP
 # ─────────────────────────────────────
 app = Flask(__name__, static_folder='static', template_folder='templates')
 CORS(app)  # Allow frontend JS to call API
+Compress(app)
 
 app.config['SECRET_KEY']         = 'freshfold-secret-change-this-in-production'
 app.config['SQLALCHEMY_DATABASE_URI']     = 'sqlite:///freshfold.db'
@@ -45,6 +49,7 @@ db = SQLAlchemy(app)
 class Order(db.Model):
     id          = db.Column(db.Integer, primary_key=True)
     order_id    = db.Column(db.String(20), unique=True, nullable=False)
+    user_id     = db.Column(db.Integer, db.ForeignKey('user.id'))  # Link to user if logged in
     name        = db.Column(db.String(100), nullable=False)
     phone       = db.Column(db.String(20),  nullable=False)
     address     = db.Column(db.Text, nullable=False)
@@ -164,6 +169,37 @@ class AdminUser(db.Model):
     username     = db.Column(db.String(50), unique=True, nullable=False)
     password_hash= db.Column(db.String(200), nullable=False)
 
+
+class User(db.Model):
+    """Regular customer user account for login/register"""
+    id            = db.Column(db.Integer, primary_key=True)
+    email         = db.Column(db.String(120), unique=True, nullable=False)
+    name          = db.Column(db.String(100), nullable=False)
+    password_hash = db.Column(db.String(200), nullable=False)
+    phone         = db.Column(db.String(20))
+    address       = db.Column(db.Text)
+    created_at    = db.Column(db.DateTime, default=datetime.utcnow)
+
+    def set_password(self, password):
+        """Hash and store password"""
+        self.password_hash = generate_password_hash(password)
+
+    def check_password(self, password):
+        """Verify password against stored hash"""
+        return check_password_hash(self.password_hash, password)
+
+    def to_dict(self):
+        """Return user info (without password)"""
+        return {
+            'id':         self.id,
+            'email':      self.email,
+            'name':       self.name,
+            'phone':      self.phone,
+            'address':    self.address,
+            'created_at': self.created_at.strftime('%Y-%m-%d'),
+        }
+
+
 # ─────────────────────────────────────
 #  HELPERS
 # ─────────────────────────────────────
@@ -254,6 +290,16 @@ def login_required(f):
     return decorated
 
 
+def user_login_required(f):
+    """Decorator to protect user routes"""
+    @wraps(f)
+    def decorated(*args, **kwargs):
+        if not session.get('user_id'):
+            return jsonify({'error': 'Unauthorized'}), 401
+        return f(*args, **kwargs)
+    return decorated
+
+
 # ─────────────────────────────────────
 #  SERVE FRONTEND PAGES
 # ─────────────────────────────────────
@@ -288,6 +334,20 @@ def serve_admin_file(filename):
 def serve_frontend(filename):
     filename = FRONTEND_ALIASES.get(filename, filename)
     return send_from_directory('../freshfold-v2', filename)
+
+
+@app.after_request
+def add_cache_headers(response):
+    """Add sensible Cache-Control headers for static assets."""
+    try:
+        path = request.path or ''
+        if path.startswith('/static/') or path.endswith(('.css', '.js', '.png', '.jpg', '.jpeg', '.webp', '.svg', '.ico', '.woff', '.woff2', '.ttf')):
+            response.headers['Cache-Control'] = 'public, max-age=31536000, immutable'
+        elif path.endswith('.html') or path == '/':
+            response.headers['Cache-Control'] = 'no-cache, no-store, must-revalidate'
+    except Exception:
+        pass
+    return response
 
 
 # ─────────────────────────────────────
@@ -334,6 +394,7 @@ def create_order():
 
     order = Order(
         order_id    = generate_order_id(),
+        user_id     = session.get('user_id'),  # Link to logged-in user if available
         name        = data['name'],
         phone       = data['phone'],
         address     = data['address'],
@@ -619,6 +680,166 @@ def delete_promo(promo_id):
 
 
 # ─────────────────────────────────────
+#  API — USER AUTHENTICATION
+# ─────────────────────────────────────
+
+@app.route('/api/auth/register', methods=['POST'])
+def register():
+    """User registration — create new account"""
+    data = request.get_json()
+
+    # Validate input
+    email    = data.get('email', '').strip().lower()
+    name     = data.get('name', '').strip()
+    password = data.get('password', '')
+    confirm  = data.get('confirm_password', '')
+
+    if not email or not name or not password:
+        return jsonify({'error': 'Email, name, and password required'}), 400
+
+    # Validate email format
+    email_regex = r'^[a-zA-Z0-9._%+-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,}$'
+    if not re.match(email_regex, email):
+        return jsonify({'error': 'Invalid email format'}), 400
+
+    # Validate password strength
+    if len(password) < 6:
+        return jsonify({'error': 'Password must be at least 6 characters'}), 400
+
+    if password != confirm:
+        return jsonify({'error': 'Passwords do not match'}), 400
+
+    # Check if user already exists
+    if User.query.filter_by(email=email).first():
+        return jsonify({'error': 'Email already registered'}), 409
+
+    # Create new user
+    user = User(email=email, name=name)
+    user.set_password(password)
+
+    db.session.add(user)
+    db.session.commit()
+
+    # Auto-login after registration
+    session['user_id']    = user.id
+    session['user_email'] = user.email
+    session.permanent     = True
+    app.permanent_session_lifetime = timedelta(days=30)
+
+    # Claim any guest orders placed with the same phone number
+    if user.phone:
+        Order.query.filter_by(phone=user.phone, user_id=None).update({'user_id': user.id})
+        db.session.commit()
+
+    return jsonify({
+        'success': True,
+        'message': 'Account created successfully!',
+        'user':    user.to_dict()
+    }), 201
+
+
+@app.route('/api/auth/login', methods=['POST'])
+def user_login():
+    """User login"""
+    data = request.get_json()
+
+    email    = data.get('email', '').strip().lower()
+    password = data.get('password', '')
+
+    if not email or not password:
+        return jsonify({'error': 'Email and password required'}), 400
+
+    user = User.query.filter_by(email=email).first()
+
+    if not user or not user.check_password(password):
+        return jsonify({'error': 'Invalid email or password'}), 401
+
+    # Set session
+    session['user_id']    = user.id
+    session['user_email'] = user.email
+    session.permanent     = True
+    app.permanent_session_lifetime = timedelta(days=30)
+
+    # Claim any guest orders placed with the same phone number
+    if user.phone:
+        Order.query.filter_by(phone=user.phone, user_id=None).update({'user_id': user.id})
+        db.session.commit()
+
+    return jsonify({
+        'success': True,
+        'message': 'Logged in successfully!',
+        'user':    user.to_dict()
+    })
+
+
+@app.route('/api/auth/logout', methods=['POST'])
+def user_logout():
+    """User logout"""
+    session.pop('user_id', None)
+    session.pop('user_email', None)
+    return jsonify({'success': True, 'message': 'Logged out'})
+
+
+@app.route('/api/auth/user', methods=['GET'])
+def get_current_user():
+    """Get current logged-in user info"""
+    user_id = session.get('user_id')
+
+    if not user_id:
+        return jsonify({'logged_in': False}), 200
+
+    user = User.query.get(user_id)
+    if not user:
+        session.pop('user_id', None)
+        return jsonify({'logged_in': False}), 200
+
+    return jsonify({
+        'logged_in': True,
+        'user':      user.to_dict()
+    })
+
+
+@app.route('/api/auth/profile', methods=['PUT'])
+@user_login_required
+def update_profile():
+    """User update their profile"""
+    user = User.query.get(session['user_id'])
+    data = request.get_json()
+
+    # Update allowed fields
+    if 'name' in data:
+        user.name = data['name'].strip()
+    if 'phone' in data:
+        user.phone = data['phone'].strip()
+    if 'address' in data:
+        user.address = data['address'].strip()
+
+    # Password change
+    if data.get('current_password') and data.get('new_password'):
+        if not user.check_password(data['current_password']):
+            return jsonify({'error': 'Current password is incorrect'}), 401
+        if len(data['new_password']) < 6:
+            return jsonify({'error': 'New password must be at least 6 characters'}), 400
+        user.set_password(data['new_password'])
+
+    db.session.commit()
+    return jsonify({
+        'success': True,
+        'message': 'Profile updated',
+        'user':    user.to_dict()
+    })
+
+
+@app.route('/api/user/orders', methods=['GET'])
+@user_login_required
+def get_user_orders():
+    """User: get their own orders"""
+    user_id = session.get('user_id')
+    orders  = Order.query.filter_by(user_id=user_id).order_by(Order.created_at.desc()).all()
+    return jsonify([o.to_dict() for o in orders])
+
+
+# ─────────────────────────────────────
 #  API — DASHBOARD STATS
 # ─────────────────────────────────────
 
@@ -639,7 +860,7 @@ def dashboard_stats():
     pending_reviews = Review.query.filter_by(approved=False).count()
 
     # Average rating from approved reviews
-    approved = Review.query.filter_by(approved=True).all()
+    approved   = Review.query.filter_by(approved=True).all()
     avg_rating = round(sum(r.stars for r in approved) / len(approved), 1) if approved else 0
 
     # Orders by status counts
@@ -648,17 +869,17 @@ def dashboard_stats():
         status_counts[o.status] = status_counts.get(o.status, 0) + 1
 
     return jsonify({
-        'total_orders':     len(all_orders),
-        'month_orders':     len(month_orders),
-        'pending':          pending,
-        'processing':       processing,
-        'delivered':        delivered,
-        'month_revenue':    month_revenue,
-        'total_revenue':    total_revenue,
-        'pending_reviews':  pending_reviews,
-        'avg_rating':       avg_rating,
-        'total_reviews':    len(approved),
-        'status_counts':    status_counts,
+        'total_orders':    len(all_orders),
+        'month_orders':    len(month_orders),
+        'pending':         pending,
+        'processing':      processing,
+        'delivered':       delivered,
+        'month_revenue':   month_revenue,
+        'total_revenue':   total_revenue,
+        'pending_reviews': pending_reviews,
+        'avg_rating':      avg_rating,
+        'total_reviews':   len(approved),
+        'status_counts':   status_counts,
     })
 
 
@@ -699,10 +920,10 @@ def seed_database():
     # Default promo codes
     if not PromoCode.query.first():
         promos = [
-            PromoCode(code='FRESH20',   discount=20,  is_percent=True,  label='20% off your order!',         active=True),
-            PromoCode(code='STUDENT10', discount=10,  is_percent=True,  label='10% student discount!',       active=True),
-            PromoCode(code='FIRST50',   discount=50,  is_percent=False, label='Rs. 50 off first order!',     active=True),
-            PromoCode(code='BULK15',    discount=15,  is_percent=True,  label='15% bulk discount!',          active=True),
+            PromoCode(code='FRESH20',   discount=20,  is_percent=True,  label='20% off your order!',     active=True),
+            PromoCode(code='STUDENT10', discount=10,  is_percent=True,  label='10% student discount!',   active=True),
+            PromoCode(code='FIRST50',   discount=50,  is_percent=False, label='Rs. 50 off first order!', active=True),
+            PromoCode(code='BULK15',    discount=15,  is_percent=True,  label='15% bulk discount!',      active=True),
         ]
         db.session.add_all(promos)
 

@@ -1,0 +1,531 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>My Orders — FreshFold</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link href="https://fonts.googleapis.com/css2?family=Outfit:wght@300;400;500;600;700;800;900&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="css/style.css">
+  <style>
+    .orders-section {
+      padding: var(--section-pad);
+      max-width: 1000px;
+      margin: 0 auto;
+    }
+
+    .orders-header {
+      margin-bottom: 2rem;
+    }
+
+    .orders-header h1 {
+      font-size: 2.5rem;
+      margin-bottom: 0.5rem;
+    }
+
+    .orders-header p {
+      color: var(--muted);
+      font-size: 1rem;
+    }
+
+    .back-link {
+      display: inline-block;
+      margin-bottom: 2rem;
+      color: var(--green);
+      text-decoration: none;
+      font-size: 0.9rem;
+      font-weight: 600;
+    }
+
+    .back-link:hover {
+      text-decoration: underline;
+    }
+
+    .order-card {
+      background: var(--card);
+      border: 1px solid var(--border);
+      border-radius: var(--radius-lg);
+      padding: 1.5rem;
+      margin-bottom: 1.5rem;
+      transition: var(--transition);
+    }
+
+    .order-card:hover {
+      transform: translateY(-2px);
+      border-color: var(--green);
+      box-shadow: 0 12px 32px rgba(22, 163, 74, 0.15);
+    }
+
+    .order-header {
+      display: flex;
+      justify-content: space-between;
+      align-items: start;
+      margin-bottom: 1rem;
+      gap: 1rem;
+      flex-wrap: wrap;
+    }
+
+    .order-id {
+      font-size: 1.1rem;
+      font-weight: 700;
+      color: var(--green);
+    }
+
+    .order-date {
+      font-size: 0.85rem;
+      color: var(--muted);
+    }
+
+    .status-badge {
+      display: inline-block;
+      padding: 0.4rem 0.8rem;
+      border-radius: 9999px;
+      font-size: 0.75rem;
+      font-weight: 700;
+      text-transform: uppercase;
+      letter-spacing: 0.05em;
+    }
+
+    .status-pending {
+      background: rgba(245, 158, 11, 0.15);
+      color: #fbbf24;
+    }
+
+    .status-pickup_scheduled {
+      background: rgba(59, 130, 246, 0.15);
+      color: #93c5fd;
+    }
+
+    .status-picked_up {
+      background: rgba(8, 145, 178, 0.15);
+      color: #67e8f9;
+    }
+
+    .status-processing {
+      background: rgba(139, 92, 246, 0.15);
+      color: #d8b4fe;
+    }
+
+    .status-out_for_delivery {
+      background: rgba(168, 85, 247, 0.15);
+      color: #e9d5ff;
+    }
+
+    .status-delivered {
+      background: rgba(34, 197, 94, 0.15);
+      color: #86efac;
+    }
+
+    .order-details {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+      gap: 1.5rem;
+      margin-bottom: 1rem;
+      padding-bottom: 1rem;
+      border-bottom: 1px solid var(--border);
+    }
+
+    .detail-item {
+      display: flex;
+      flex-direction: column;
+    }
+
+    .detail-label {
+      font-size: 0.8rem;
+      color: var(--muted);
+      text-transform: uppercase;
+      letter-spacing: 0.05em;
+      margin-bottom: 0.3rem;
+    }
+
+    .detail-value {
+      font-size: 0.95rem;
+      font-weight: 600;
+      color: var(--text);
+    }
+
+    .order-items {
+      margin-bottom: 1rem;
+    }
+
+    .items-title {
+      font-size: 0.9rem;
+      font-weight: 700;
+      color: var(--text);
+      margin-bottom: 0.75rem;
+    }
+
+    .item-list {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 0.5rem;
+    }
+
+    .item-tag {
+      background: rgba(22, 163, 74, 0.15);
+      border: 1px solid rgba(22, 163, 74, 0.3);
+      color: var(--green-light);
+      padding: 0.4rem 0.8rem;
+      border-radius: 6px;
+      font-size: 0.85rem;
+    }
+
+    .order-footer {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      flex-wrap: wrap;
+      gap: 1rem;
+    }
+
+    .order-total {
+      font-size: 1.2rem;
+      font-weight: 700;
+      color: var(--green);
+    }
+
+    .order-actions {
+      display: flex;
+      gap: 0.75rem;
+      flex-wrap: wrap;
+    }
+
+    .btn-small {
+      padding: 0.5rem 1rem;
+      background: rgba(22, 163, 74, 0.15);
+      border: 1px solid rgba(22, 163, 74, 0.3);
+      color: var(--green-light);
+      border-radius: var(--radius);
+      font-size: 0.85rem;
+      font-weight: 600;
+      font-family: var(--font);
+      cursor: pointer;
+      transition: var(--transition);
+      text-decoration: none;
+      display: inline-block;
+    }
+
+    .btn-small:hover {
+      background: rgba(22, 163, 74, 0.25);
+      border-color: var(--green);
+    }
+
+    .empty-state {
+      text-align: center;
+      padding: 3rem 2rem;
+      background: var(--card);
+      border: 1px solid var(--border);
+      border-radius: var(--radius-lg);
+    }
+
+    .empty-state-icon {
+      font-size: 4rem;
+      margin-bottom: 1rem;
+    }
+
+    .empty-state h2 {
+      font-size: 1.5rem;
+      margin-bottom: 0.5rem;
+    }
+
+    .empty-state p {
+      color: var(--muted);
+      margin-bottom: 1.5rem;
+    }
+
+    .empty-state .btn-green {
+      display: inline-block;
+    }
+
+    .filter-buttons {
+      display: flex;
+      gap: 0.75rem;
+      margin-bottom: 2rem;
+      flex-wrap: wrap;
+    }
+
+    .filter-btn {
+      padding: 0.6rem 1.2rem;
+      background: transparent;
+      border: 1px solid var(--border);
+      color: var(--text);
+      border-radius: var(--radius);
+      font-family: var(--font);
+      font-weight: 600;
+      cursor: pointer;
+      transition: var(--transition);
+    }
+
+    .filter-btn.active {
+      background: var(--green);
+      border-color: var(--green);
+      color: white;
+    }
+
+    .filter-btn:hover {
+      border-color: var(--green);
+      color: var(--green);
+    }
+
+    .loading {
+      text-align: center;
+      padding: 2rem;
+      color: var(--muted);
+    }
+
+    @media (max-width: 768px) {
+      .orders-header h1 {
+        font-size: 1.8rem;
+      }
+
+      .order-header {
+        flex-direction: column;
+      }
+
+      .order-details {
+        grid-template-columns: 1fr;
+      }
+
+      .order-footer {
+        flex-direction: column;
+        align-items: flex-start;
+      }
+
+      .order-actions {
+        width: 100%;
+      }
+    }
+  </style>
+</head>
+<body>
+  <!-- NAVBAR -->
+  <nav class="navbar">
+    <div class="nav-logo">Fresh<span>Fold</span></div>
+    <ul class="nav-links">
+      <li><a href="index.html">Home</a></li>
+      <li><a href="services.html">Services</a></li>
+      <li><a href="how-it-works.html">How It Works</a></li>
+      <li><a href="track.html">Track Order</a></li>
+      <li><a href="blog.html">Blog</a></li>
+      <li><a href="about.html">About</a></li>
+      <li><a href="contact.html">Contact</a></li>
+    </ul>
+    <div class="nav-right">
+      <div id="authBtnContainer"></div>
+      <a href="order.html" class="btn btn-green">Order Now</a>
+    </div>
+    <div class="hamburger" onclick="toggleMenu()">&#9776;</div>
+  </nav>
+  <div class="mobile-menu" id="mobileMenu">
+    <a href="index.html">Home</a><a href="services.html">Services</a>
+    <a href="how-it-works.html">How It Works</a><a href="track.html">Track Order</a>
+    <a href="blog.html">Blog</a><a href="about.html">About</a><a href="contact.html">Contact</a>
+    <a href="order.html" class="btn btn-green">Order Now</a>
+  </div>
+
+  <section class="orders-section">
+    <a href="index.html" class="back-link">← Back to Home</a>
+
+    <div class="orders-header">
+      <h1>My Orders</h1>
+      <p>View all your orders and their status</p>
+    </div>
+
+    <!-- Filter Buttons -->
+    <div class="filter-buttons">
+      <button class="filter-btn active" onclick="filterOrders(event, 'all')">All Orders</button>
+<button class="filter-btn" onclick="filterOrders(event, 'pending')">Pending</button>
+<button class="filter-btn" onclick="filterOrders(event, 'pickup_scheduled')">Scheduled</button>
+<button class="filter-btn" onclick="filterOrders(event, 'picked_up')">Picked Up</button>
+<button class="filter-btn" onclick="filterOrders(event, 'processing')">Processing</button>
+<button class="filter-btn" onclick="filterOrders(event, 'out_for_delivery')">Out for Delivery</button>
+<button class="filter-btn" onclick="filterOrders(event, 'delivered')">Delivered</button>
+    </div>
+
+    <!-- Orders Container -->
+    <div id="ordersContainer">
+      <div class="loading">⏳ Loading your orders...</div>
+    </div>
+
+    <!-- Quick Links -->
+    <div style="text-align: center; margin-top: 3rem;">
+      <a href="profile.html" class="btn btn-outline" style="margin-right: 1rem;">My Profile</a>
+      <a href="index.html" class="btn btn-outline">← Back Home</a>
+    </div>
+  </section>
+
+  <script src="js/api.js"></script>
+  <script src="js/auth.js"></script>
+  <script>
+    let allOrders = [];
+    let currentFilter = 'all';
+
+    // Require authentication
+    (async () => {
+      const isAuth = await requireAuth();
+      if (!isAuth) return;
+
+      loadOrders();
+    })();
+
+    async function loadOrders() {
+      const container = document.getElementById('ordersContainer');
+
+      try {
+        const orders = await apiFetch('/api/user/orders');
+        allOrders = orders;
+if (allOrders.length === 0) {
+  container.innerHTML = `
+    <div class="empty-state">
+      <div class="empty-state-icon">📭</div>
+      <h2>No Orders Found</h2>
+      <p>Orders placed while <strong>not signed in</strong> won't appear here.</p>
+      <p style="margin-top: 0.5rem; color: var(--muted); font-size: 0.9rem;">
+        If you placed an order as a guest, 
+        <a href="track.html" style="color: var(--green);">track it by Order ID</a> instead.
+      </p>
+      <a href="order.html" class="btn btn-green" style="margin-top: 1.5rem;">📦 Place an Order</a>
+    </div>
+  `;
+  return;
+}
+
+        renderOrders();
+      } catch (err) {
+        container.innerHTML = `
+          <div class="empty-state">
+            <div class="empty-state-icon">❌</div>
+            <h2>Error Loading Orders</h2>
+            <p>${err.message}</p>
+            <button onclick="location.reload()" class="btn btn-green">🔄 Try Again</button>
+          </div>
+        `;
+      }
+    }
+
+    function filterOrders(event, status) {
+  currentFilter = status;
+  document.querySelectorAll('.filter-btn').forEach(btn => {
+    btn.classList.remove('active');
+  });
+  event.target.classList.add('active');
+  renderOrders();
+}
+
+    function renderOrders() {
+      const container = document.getElementById('ordersContainer');
+
+      let filtered = allOrders;
+      if (currentFilter !== 'all') {
+        filtered = allOrders.filter(o => o.status === currentFilter);
+      }
+
+      if (filtered.length === 0) {
+        container.innerHTML = `
+          <div class="empty-state">
+            <div class="empty-state-icon">🔍</div>
+            <h2>No Orders Found</h2>
+            <p>No orders match the selected filter.</p>
+          </div>
+        `;
+        return;
+      }
+
+      container.innerHTML = filtered.map(order => createOrderCard(order)).join('');
+    }
+
+    function createOrderCard(order) {
+      const items = order.items || [];
+      const itemsDisplay = items.map(i => `<span class="item-tag">${i.label} ×${i.count}</span>`).join('');
+      
+      return `
+        <div class="order-card">
+          <div class="order-header">
+            <div>
+              <div class="order-id">Order ${order.order_id}</div>
+              <div class="order-date">${new Date(order.created_at.replace(' ', 'T') + ':00Z').toLocaleDateString('en-US', { year: 'numeric', month: 'long', day: 'numeric', hour: '2-digit', minute: '2-digit' })}</div>
+            </div>
+            <span class="status-badge status-${order.status}">${formatStatus(order.status)}</span>
+          </div>
+
+          <div class="order-details">
+            <div class="detail-item">
+              <div class="detail-label">Recipient</div>
+              <div class="detail-value">${order.name}</div>
+            </div>
+            <div class="detail-item">
+              <div class="detail-label">Phone</div>
+              <div class="detail-value">${order.phone}</div>
+            </div>
+            <div class="detail-item">
+              <div class="detail-label">Area</div>
+              <div class="detail-value">${order.area}</div>
+            </div>
+            <div class="detail-item">
+              <div class="detail-label">Service</div>
+              <div class="detail-value">${order.service === 'ironing' ? '👔 Ironing' : '🧺 Washing'} — ${order.delivery === 'exp' ? '⚡ Express' : '📦 Standard'}</div>
+            </div>
+          </div>
+
+          <div class="order-items">
+            <div class="items-title">Items</div>
+            <div class="item-list">
+              ${itemsDisplay}
+            </div>
+          </div>
+
+          <div class="order-footer">
+            <div class="order-total">Rs. ${order.total.toFixed(0)}</div>
+            <div class="order-actions">
+              <a href="track.html?order=${order.order_id}" class="btn-small">🔍 Track Order</a>
+              <button onclick="showOrderDetails('${order.order_id}')" class="btn-small">📋 Details</button>
+            </div>
+          </div>
+        </div>
+      `;
+    }
+
+    function formatStatus(status) {
+      const map = {
+        'pending': '🕐 Pending',
+        'pickup_scheduled': '📞 Scheduled',
+        'picked_up': '🎁 Picked Up',
+        'processing': '🧺 Processing',
+        'out_for_delivery': '🚴 Out for Delivery',
+        'delivered': '✅ Delivered'
+      };
+      return map[status] || status;
+    }
+
+    function showOrderDetails(orderId) {
+      const order = allOrders.find(o => o.order_id === orderId);
+      if (!order) return;
+
+      const details = `
+Order ID: ${order.order_id}
+Status: ${formatStatus(order.status)}
+Name: ${order.name}
+Phone: ${order.phone}
+Address: ${order.address}
+Area: ${order.area}
+Service: ${order.service}
+Delivery: ${order.delivery}
+Items: ${order.items.map(i => i.label + ' ×' + i.count).join(', ')}
+Subtotal: Rs. ${order.subtotal}
+Discount: Rs. ${order.discount}
+Total: Rs. ${order.total}
+Notes: ${order.notes || 'None'}
+Pickup Time: ${order.pickup_time || 'Flexible'}
+      `;
+
+      alert(details);
+    }
+
+    // Mobile menu toggle
+    function toggleMenu() {
+      const menu = document.getElementById('mobileMenu');
+      menu.style.display = menu.style.display === 'block' ? 'none' : 'block';
+    }
+  </script>
+</body>
+</html>

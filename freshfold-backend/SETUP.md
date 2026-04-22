@@ -46,7 +46,7 @@ Open Command Prompt. Navigate to the backend folder:
 Create and use a virtual environment:
 
   python -m venv .venv
-  .\.venv\Scripts\Activate.ps1
+  \.v.env\Scripts\Activate.ps1
 
 Install all packages:
 

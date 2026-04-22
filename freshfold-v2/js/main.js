@@ -28,11 +28,11 @@ function applyPromo() {
   if (!code) { result.textContent = 'Please enter a code.'; result.className = 'promo-result error'; return; }
   const promo = PROMO_CODES[code];
   if (promo) {
-    result.textContent = `✅ Code applied! ${promo.label}`;
+    result.textContent = `Code applied! ${promo.label}`;
     result.className = 'promo-result success';
     localStorage.setItem('appliedPromo', JSON.stringify({ code, ...promo }));
   } else {
-    result.textContent = '❌ Invalid promo code. Try: FRESH20, STUDENT10, FIRST50';
+    result.textContent = 'Invalid promo code. Try: FRESH20, STUDENT10, FIRST50';
     result.className = 'promo-result error';
   }
 }
@@ -41,7 +41,7 @@ function useCode(code) {
   document.getElementById('promoCode').value = code;
   navigator.clipboard?.writeText(code).catch(()=>{});
   const r = document.getElementById('promoResult');
-  r.textContent = '✅ ' + code + ' ready — click Apply to use it';
+  r.textContent = code + ' ready — click Apply to use it';
   r.style.color = 'var(--green-light)';
   document.querySelector('.promo-split').scrollIntoView({behavior:'smooth',block:'center'});
 }
@@ -61,7 +61,7 @@ function trackOrder() {
   if (!id) return;
   const order = SAMPLE_ORDERS[id];
   if (!order) {
-    result.innerHTML = `<p style="color:#f87171;text-align:center;padding:1rem;">❌ Order ID not found. Try: FF-1001, FF-1002, or FF-1003</p>`;
+    result.innerHTML = `<p style="color:#f87171;text-align:center;padding:1rem;">Order ID not found. Try: FF-1001, FF-1002, or FF-1003</p>`;
     result.classList.add('show');
     return;
   }
@@ -109,8 +109,12 @@ function submitReview() {
   document.getElementById('reviewName').value = '';
   document.getElementById('reviewText').value = '';
   document.querySelectorAll('.star-select span').forEach(s => { s.classList.remove('lit'); delete s.dataset.selected; });
-  alert('✅ Thank you for your review!');
-  loadDynamicReviews();
+  alert('Thank you for your review!');
+  if (typeof loadReviewsFromAPI === 'function') {
+  loadReviewsFromAPI();
+} else {
+  loadDynamicReviews(); // fallback to localStorage
+}
 }
 
 function loadDynamicReviews() {
@@ -123,7 +127,7 @@ function loadDynamicReviews() {
       <div class="rc-stars">${'★'.repeat(r.stars)}${'☆'.repeat(5-r.stars)}</div>
       <p class="rc-text">"${r.text}"</p>
       <div class="rc-author">
-        <div class="rc-avatar">👤</div>
+        <div class="rc-avatar">${r.name ? r.name.charAt(0) : 'U'}</div>
         <div class="rc-name"><strong>${r.name}</strong><span>${r.date}</span></div>
       </div>
     </div>`).join('');
@@ -133,5 +137,16 @@ function loadDynamicReviews() {
 // ── INIT ──
 document.addEventListener('DOMContentLoaded', () => {
   initStars();
-  loadDynamicReviews();
+  if (typeof loadReviewsFromAPI === 'function') {
+    loadReviewsFromAPI();
+  } else {
+    loadDynamicReviews();
+  }
 });
+
+// Register service worker for caching (optional)
+if ('serviceWorker' in navigator) {
+  window.addEventListener('load', () => {
+   navigator.serviceWorker.register('./sw.js').catch(() => {});
+  });
+}
