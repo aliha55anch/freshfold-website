@@ -524,6 +524,7 @@ h4 {
 .nav-logo span {
   background: linear-gradient(90deg, var(--green-light), var(--green-neon));
   -webkit-background-clip: text;
+  background-clip: text;
   -webkit-text-fill-color: transparent;
 }
 
@@ -777,6 +778,7 @@ h4 {
   margin-bottom: 0.7rem;
   background: linear-gradient(135deg, #fff 40%, var(--green-light) 100%);
   -webkit-background-clip: text;
+  background-clip: text;
   -webkit-text-fill-color: transparent;
 }
 
@@ -813,6 +815,7 @@ h4 {
   margin-bottom: 0.9rem;
   background: linear-gradient(135deg, #fff 0%, rgba(255, 255, 255, 0.75) 100%);
   -webkit-background-clip: text;
+  background-clip: text;
   -webkit-text-fill-color: transparent;
   animation: fadeUp 0.8s ease forwards;
 }
@@ -987,6 +990,7 @@ h4 {
       var(--green-light) 100%);
   background-size: 200% auto;
   -webkit-background-clip: text;
+  background-clip: text;
   -webkit-text-fill-color: transparent;
   animation:
     fadeUp 0.8s 0.15s ease both,
@@ -996,6 +1000,7 @@ h4 {
 .hero h1 span {
   background: linear-gradient(100deg, var(--green-light), var(--green-neon));
   -webkit-background-clip: text;
+  background-clip: text;
   -webkit-text-fill-color: transparent;
   background-size: 200% auto;
   animation: shimmer 4s linear infinite;
@@ -3549,6 +3554,7 @@ textarea.form-control {
   font-style: normal;
   background: linear-gradient(100deg, var(--green-light), var(--green-neon));
   -webkit-background-clip: text;
+  background-clip: text;
   -webkit-text-fill-color: transparent;
 }
 

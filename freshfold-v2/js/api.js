@@ -80,7 +80,7 @@ async function submitOrderToAPI() {
   }
 
   const btn = document.querySelector('.submit-btn');
-  if (btn) { btn.textContent = 'Placing order...'; btn.disabled = true; }
+  if (btn) { btn.textContent = '⏳ Placing order...'; btn.disabled = true; }
 
   try {
     const result = await apiFetch('/api/orders', {
@@ -99,7 +99,7 @@ async function submitOrderToAPI() {
     // Show success
     const msg = document.getElementById('orderSuccess');
     if (msg) {
-      msg.textContent = `Order ${result.order_id} placed! Total: Rs. ${result.total.toFixed(0)}. We'll confirm via WhatsApp shortly.`;
+      msg.textContent = `✅ Order ${result.order_id} placed! Total: Rs. ${result.total.toFixed(0)}. We'll confirm via WhatsApp shortly.`;
       msg.style.display = 'block';
     }
 
@@ -112,7 +112,7 @@ async function submitOrderToAPI() {
   } catch (err) {
     showAlert('Failed to place order: ' + err.message, 'error');
   } finally {
-    if (btn) { btn.textContent = 'Confirm via WhatsApp'; btn.disabled = false; }
+    if (btn) { btn.textContent = '💬 Confirm Order via WhatsApp 📱'; btn.disabled = false; }
   }
 }
 
@@ -142,7 +142,7 @@ async function trackOrderAPI() {
   const result = document.getElementById('trackerResult');
   if (!id || !result) return;
 
-  result.innerHTML = '<p style="text-align:center;color:var(--muted);padding:1rem;">Searching...</p>';
+  result.innerHTML = '<p style="text-align:center;color:var(--muted);padding:1rem;">🔍 Searching...</p>';
   result.classList.add('show');
 
   try {
@@ -174,7 +174,7 @@ async function trackOrderAPI() {
       </div>
       <div class="track-steps">${stepsHTML}</div>`;
   } catch (err) {
-    result.innerHTML = `<p style="color:#f87171;text-align:center;padding:1rem;">Error: ${err.message}. Try: FF-1001</p>`;
+    result.innerHTML = `<p style="color:#f87171;text-align:center;padding:1rem;">❌ Error: ${err.message}. Try: FF-1001</p>`;
   }
 }
 
